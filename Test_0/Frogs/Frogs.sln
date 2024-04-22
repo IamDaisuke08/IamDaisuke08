@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frogs", "Frogs\Frogs.csproj", "{9311822D-BFD8-406D-B491-5003E89C950E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Split", "..\Split\Split\Split.csproj", "{A4C3A927-4C09-4B49-9314-02F8E455371B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Balance", "..\Balance\Balance\Balance.csproj", "{0C83272A-02F3-4F0C-8888-1DF82B37A1EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9311822D-BFD8-406D-B491-5003E89C950E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9311822D-BFD8-406D-B491-5003E89C950E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9311822D-BFD8-406D-B491-5003E89C950E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9311822D-BFD8-406D-B491-5003E89C950E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4C3A927-4C09-4B49-9314-02F8E455371B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4C3A927-4C09-4B49-9314-02F8E455371B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4C3A927-4C09-4B49-9314-02F8E455371B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4C3A927-4C09-4B49-9314-02F8E455371B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C83272A-02F3-4F0C-8888-1DF82B37A1EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C83272A-02F3-4F0C-8888-1DF82B37A1EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C83272A-02F3-4F0C-8888-1DF82B37A1EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C83272A-02F3-4F0C-8888-1DF82B37A1EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
