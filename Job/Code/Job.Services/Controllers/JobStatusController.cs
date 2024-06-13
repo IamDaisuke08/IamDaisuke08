@@ -26,7 +26,7 @@ namespace Job.Services.Controllers
         public async Task<ActionResult<IEnumerable<JobStatusDTO>>> GetJobStatuses()
         {
             return await _context.JobStatuses
-                .Select(x => (JobStatus)x)
+                .Select(x => (JobStatusDTO)x)
                 .ToListAsync();
         }
 
