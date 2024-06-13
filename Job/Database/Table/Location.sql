@@ -1,0 +1,11 @@
+CREATE TABLE [dbo].[Location]
+(
+	[Id]			BIGINT IDENTITY(1,1) NOT NULL,
+	[Name]			VARCHAR(100) NOT NULL,
+	[CreatedDate]	DATETIME NOT NULL CONSTRAINT DF_Location_CreatedDate DEFAULT(GETUTCDATE())
+
+	CONSTRAINT [PK__Location] PRIMARY KEY CLUSTERED
+	(
+		[Id] ASC
+	)
+)

@@ -1,0 +1,11 @@
+CREATE TABLE [dbo].[JobStatus]
+(
+	[Id]			BIGINT IDENTITY(1,1) NOT NULL,
+	[Name]			VARCHAR(100) NOT NULL,
+	[CreatedDate]	DATETIME NOT NULL CONSTRAINT DF_JobStatus_CreatedDate DEFAULT(GETUTCDATE())
+
+	CONSTRAINT [PK__JobStatus] PRIMARY KEY CLUSTERED
+	(
+		[Id] ASC
+	)
+)
