@@ -1,4 +1,6 @@
-export class JobStatusItem {
+import { GenericItem } from "./genericItem";
+
+export class JobStatusItem implements GenericItem {
 
     onEditMode: boolean = false;
     

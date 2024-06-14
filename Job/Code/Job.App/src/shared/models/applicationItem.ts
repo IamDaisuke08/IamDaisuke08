@@ -1,4 +1,9 @@
-export class ApplicationItem {
+import { GenericItem } from "./genericItem";
+
+export class ApplicationItem implements GenericItem {
+    
+    onEditMode: boolean = false;
+
     constructor(
         public id : number,
         public companyName : string,

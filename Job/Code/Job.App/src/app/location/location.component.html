@@ -1,1 +1,9 @@
-<p>location works!</p>
+<h3>
+    <span class="badge bg-dark text-white">Locations</span>
+</h3>
+<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+    <div class="col-12 d-flex justify-content-end align-items-end align-self-end">
+        <button type="button" class="btn bg-dark text-white my-2" (click)="addNew()">Add New</button>
+    </div>
+</div>
+<location-list [collection]="mainCollection"></location-list>

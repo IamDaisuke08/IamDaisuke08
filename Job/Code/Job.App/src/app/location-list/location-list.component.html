@@ -1,9 +1,9 @@
-<div *ngIf="collection.length == 0; else showJobStatus">
+<div *ngIf="collection.length == 0; else showLocations">
     <div class="container mt-5 d-flex justify-content-center align-items-center align-self-center">
-        <span class="badge bg-dark text-white" style="font-size: x-large;">No JobStatus to show at the moment. Consider adding one via AddNew button. :P</span>
+        <span class="badge bg-dark text-white" style="font-size: x-large;">No Locations to show at the moment. Consider adding one via AddNew button. :P</span>
     </div>
 </div>
-<ng-template #showJobStatus>
+<ng-template #showLocations>
     <table class="table table-sm table-striped table-bordered table-hover">
         <thead class="bg-dark text-white">
             <tr>
