@@ -35,13 +35,12 @@ namespace Job.Services.Controllers
         public async Task<ActionResult<LocationDTO>> GetLocation(long id)
         {
             var location = await _context.Locations.FindAsync(id);
-
             if (location == null)
             {
                 return NotFound();
             }
 
-            return (LocationDTO)location;
+            return this.EntityToDto(location);
         }
 
         // PUT: api/Locations/5
@@ -54,7 +53,7 @@ namespace Job.Services.Controllers
                 return BadRequest();
             }
 
-            _context.Entry((Location)location).State = EntityState.Modified;
+            _context.Entry(this.DtoToEntity(location)).State = EntityState.Modified;
 
             try
             {
@@ -80,10 +79,11 @@ namespace Job.Services.Controllers
         [HttpPost]
         public async Task<ActionResult<LocationDTO>> PostLocation(LocationDTO location)
         {
-            _context.Locations.Add((Location)location);
+            var newLocation = this.DtoToEntity(location);
+            _context.Locations.Add(newLocation);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLocation", new { id = location.Id }, (LocationDTO)location);
+            return CreatedAtAction("GetLocation", new { id = newLocation.Id }, this.EntityToDto(newLocation));
         }
 
         // DELETE: api/Locations/5
@@ -105,6 +105,26 @@ namespace Job.Services.Controllers
         private bool LocationExists(long id)
         {
             return _context.Locations.Any(e => e.Id == id);
+        }
+
+        private Location DtoToEntity(LocationDTO location)
+        {
+            return new Location()
+            {
+                Id = location.Id,
+                Name = location.Name,
+                CreatedDate = location.CreatedDate
+            };
+        }
+
+        private LocationDTO EntityToDto(Location location)
+        {
+            return new LocationDTO()
+            {
+                Id = location.Id,
+                Name = location.Name,
+                CreatedDate = location.CreatedDate
+            };
         }
     }
 }

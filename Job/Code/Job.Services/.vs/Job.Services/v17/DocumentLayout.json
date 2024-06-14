@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "D:\\Main\\Job\\Code\\Job.Services\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7147964D-E361-4B03-8AD3-FFF3F17D0B28}|Job.Services.csproj|d:\\main\\job\\code\\job.services\\contracts\\jobapplicationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7147964D-E361-4B03-8AD3-FFF3F17D0B28}|Job.Services.csproj|solutionrelative:contracts\\jobapplicationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7147964D-E361-4B03-8AD3-FFF3F17D0B28}|Job.Services.csproj|d:\\main\\job\\code\\job.services\\controllers\\jobapplicationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7147964D-E361-4B03-8AD3-FFF3F17D0B28}|Job.Services.csproj|solutionrelative:controllers\\jobapplicationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7147964D-E361-4B03-8AD3-FFF3F17D0B28}|Job.Services.csproj|d:\\main\\job\\code\\job.services\\controllers\\locationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7147964D-E361-4B03-8AD3-FFF3F17D0B28}|Job.Services.csproj|solutionrelative:controllers\\locationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7147964D-E361-4B03-8AD3-FFF3F17D0B28}|Job.Services.csproj|d:\\main\\job\\code\\job.services\\controllers\\jobapplicationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7147964D-E361-4B03-8AD3-FFF3F17D0B28}|Job.Services.csproj|solutionrelative:controllers\\jobapplicationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7147964D-E361-4B03-8AD3-FFF3F17D0B28}|Job.Services.csproj|d:\\main\\job\\code\\job.services\\controllers\\jobstatuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,40 +27,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "JobApplicationDTO.cs",
-              "DocumentMoniker": "D:\\Main\\Job\\Code\\Job.Services\\Contracts\\JobApplicationDTO.cs",
-              "RelativeDocumentMoniker": "Contracts\\JobApplicationDTO.cs",
-              "ToolTip": "D:\\Main\\Job\\Code\\Job.Services\\Contracts\\JobApplicationDTO.cs",
-              "RelativeToolTip": "Contracts\\JobApplicationDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T02:36:10.07Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "JobStatusController.cs",
-              "DocumentMoniker": "D:\\Main\\Job\\Code\\Job.Services\\Controllers\\JobStatusController.cs",
-              "RelativeDocumentMoniker": "Controllers\\JobStatusController.cs",
-              "ToolTip": "D:\\Main\\Job\\Code\\Job.Services\\Controllers\\JobStatusController.cs",
-              "RelativeToolTip": "Controllers\\JobStatusController.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAAAwwBsAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T02:31:22.109Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "JobApplicationsController.cs",
               "DocumentMoniker": "D:\\Main\\Job\\Code\\Job.Services\\Controllers\\JobApplicationsController.cs",
               "RelativeDocumentMoniker": "Controllers\\JobApplicationsController.cs",
               "ToolTip": "D:\\Main\\Job\\Code\\Job.Services\\Controllers\\JobApplicationsController.cs",
               "RelativeToolTip": "Controllers\\JobApplicationsController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEQAAAAUAAAA",
+              "ViewState": "AQIAAGgAAAAAAAAAAAA8wE0AAABjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T01:10:59.438Z",
+              "WhenOpened": "2024-06-13T23:55:19.536Z",
               "EditorCaption": ""
             },
             {
@@ -75,9 +45,22 @@
               "RelativeDocumentMoniker": "Controllers\\LocationsController.cs",
               "ToolTip": "D:\\Main\\Job\\Code\\Job.Services\\Controllers\\LocationsController.cs",
               "RelativeToolTip": "Controllers\\LocationsController.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAAAEIAAAAmAAAA",
+              "ViewState": "AQIAAFoAAAAAAAAAAAA4wFYAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T22:54:39.661Z",
+              "WhenOpened": "2024-06-13T23:53:21.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JobStatusController.cs",
+              "DocumentMoniker": "D:\\Main\\Job\\Code\\Job.Services\\Controllers\\JobStatusController.cs",
+              "RelativeDocumentMoniker": "Controllers\\JobStatusController.cs",
+              "ToolTip": "D:\\Main\\Job\\Code\\Job.Services\\Controllers\\JobStatusController.cs",
+              "RelativeToolTip": "Controllers\\JobStatusController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACkAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-13T23:40:37.774Z",
               "EditorCaption": ""
             }
           ]

@@ -35,13 +35,12 @@ namespace Job.Services.Controllers
         public async Task<ActionResult<JobApplicationDTO>> GetJobApplication(long id)
         {
             var jobApplication = await _context.JobApplications.FindAsync(id);
-
             if (jobApplication == null)
             {
                 return NotFound();
             }
 
-            return jobApplication;
+            return this.EntityToDto(jobApplication);
         }
 
         // PUT: api/JobApplications/5
@@ -54,7 +53,7 @@ namespace Job.Services.Controllers
                 return BadRequest();
             }
 
-            _context.Entry((JobApplication)jobApplication).State = EntityState.Modified;
+            _context.Entry(this.DtoToEntity(jobApplication)).State = EntityState.Modified;
 
             try
             {
@@ -80,10 +79,11 @@ namespace Job.Services.Controllers
         [HttpPost]
         public async Task<ActionResult<JobApplicationDTO>> PostJobApplication(JobApplicationDTO jobApplication)
         {
-            _context.JobApplications.Add((JobApplication)jobApplication);
+            var newJobApplication = this.DtoToEntity(jobApplication);
+            _context.JobApplications.Add(newJobApplication);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetJobApplication", new { id = jobApplication.Id }, (JobApplicationDTO)jobApplication);
+            return CreatedAtAction("GetJobApplication", new { id = newJobApplication.Id }, this.EntityToDto(newJobApplication));
         }
 
         // DELETE: api/JobApplications/5
@@ -105,6 +105,34 @@ namespace Job.Services.Controllers
         private bool JobApplicationExists(long id)
         {
             return _context.JobApplications.Any(e => e.Id == id);
+        }
+
+        private JobApplication DtoToEntity(JobApplicationDTO jobApplication)
+        {
+            return new JobApplication()
+            {
+                Id = jobApplication.Id,
+                CompanyName = jobApplication.CompanyName,
+                Position = jobApplication.Position,
+                LocationId = jobApplication.LocationId,
+                StatusId = jobApplication.StatusId,
+                Comment = jobApplication.Comment,
+                CreatedDate = jobApplication.CreatedDate
+            };
+        }
+
+        private JobApplicationDTO EntityToDto(JobApplication jobApplication)
+        {
+            return new JobApplicationDTO()
+            {
+                Id = jobApplication.Id,
+                CompanyName = jobApplication.CompanyName,
+                Position = jobApplication.Position,
+                LocationId = jobApplication.LocationId,
+                StatusId = jobApplication.StatusId,
+                Comment = jobApplication.Comment,
+                CreatedDate = jobApplication.CreatedDate
+            };
         }
     }
 }

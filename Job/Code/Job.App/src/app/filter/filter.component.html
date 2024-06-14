@@ -1,0 +1,13 @@
+<div>
+    <select
+        id="filter-id"
+        name="filter-name"
+        class="form-select"
+        [(ngModel)]="value"
+        (ngModelChange)="updateFilter($event)">
+            <option value="0">All</option>
+            <option *ngFor="let item of list"
+                [value]="item.Id"
+            >{{ item.name }}</option>
+    </select>
+</div>

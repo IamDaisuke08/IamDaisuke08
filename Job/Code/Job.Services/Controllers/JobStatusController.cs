@@ -41,7 +41,7 @@ namespace Job.Services.Controllers
                 return NotFound();
             }
 
-            return (JobStatus)jobStatus;
+            return this.EntityToDto(jobStatus);
         }
 
         // PUT: api/JobStatus/5
@@ -54,7 +54,7 @@ namespace Job.Services.Controllers
                 return BadRequest();
             }
 
-            _context.Entry((JobStatus)jobStatus).State = EntityState.Modified;
+            _context.Entry(this.DtoToEntity(jobStatus)).State = EntityState.Modified;
 
             try
             {
@@ -80,10 +80,11 @@ namespace Job.Services.Controllers
         [HttpPost]
         public async Task<ActionResult<JobStatusDTO>> PostJobStatus(JobStatusDTO jobStatus)
         {
-            _context.JobStatuses.Add((JobStatus)jobStatus);
+            var newJobStatus = this.DtoToEntity(jobStatus);
+            _context.JobStatuses.Add(newJobStatus);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetJobStatus", new { id = jobStatus.Id }, (JobStatusDTO)jobStatus);
+            return CreatedAtAction("GetJobStatus", new { id = newJobStatus.Id }, this.EntityToDto(newJobStatus));
         }
 
         // DELETE: api/JobStatus/5
@@ -105,6 +106,26 @@ namespace Job.Services.Controllers
         private bool JobStatusExists(long id)
         {
             return _context.JobStatuses.Any(e => e.Id == id);
+        }
+
+        private JobStatus DtoToEntity(JobStatusDTO jobStatus)
+        {
+            return new JobStatus()
+            {
+                Id = jobStatus.Id,
+                Name = jobStatus.Name,
+                CreatedDate = jobStatus.CreatedDate,
+            };
+        }
+
+        private JobStatusDTO EntityToDto(JobStatus jobStatus)
+        {
+            return new JobStatusDTO()
+            {
+                Id = jobStatus.Id,
+                Name = jobStatus.Name,
+                CreatedDate = jobStatus.CreatedDate
+            };
         }
     }
 }
