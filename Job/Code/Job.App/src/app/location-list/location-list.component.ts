@@ -14,11 +14,12 @@ import { GenericCrud } from '../generic-crud';
 })
 export class LocationListComponent extends GenericCrud<LocationItem> implements OnInit {
 
+  path = "Locations";
+
   constructor(override service : GenericHttpService<LocationItem>) {
     super(service);
   }
 
   ngOnInit(): void {
-    this.service.Path = "Locations";
   }
 }

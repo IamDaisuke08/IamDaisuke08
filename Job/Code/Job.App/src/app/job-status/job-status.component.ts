@@ -13,10 +13,11 @@ import { GenericHttpService } from '../../shared/services/generic-http.service';
 })
 export class JobStatusComponent implements OnInit {
 
+  path = "JobStatus";
+
   mainCollection : JobStatusItem[] = [];
 
   constructor(private service : GenericHttpService<JobStatusItem>) { 
-    this.service.Path = "JobStatus";
   }
 
   ngOnInit(): void {
@@ -25,7 +26,7 @@ export class JobStatusComponent implements OnInit {
   
   private load()
   {
-    this.service.get().subscribe((collection : any) => {
+    this.service.get(this.path).subscribe((collection : any) => {
       console.log('status loaded');
       this.mainCollection = collection;
     },

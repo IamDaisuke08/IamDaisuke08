@@ -14,13 +14,13 @@ import { GenericCrud } from '../generic-crud';
   styleUrl: './job-status-list.component.css'
 })
 export class JobStatusListComponent extends GenericCrud<JobStatusItem> implements OnInit {
-  
+  path = "JobStatus";
+
   constructor(override service : GenericHttpService<JobStatusItem>) { 
     super(service);
   }
 
   ngOnInit(): void {
-    this.service.Path = "JobStatus";
   }
 }
 

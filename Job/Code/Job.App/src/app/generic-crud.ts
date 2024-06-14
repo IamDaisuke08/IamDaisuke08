@@ -9,13 +9,7 @@ export class GenericCrud<T extends GenericItem> {
 
     @Input() collection : T[] = [];
 
-    path : string = "";
-
     constructor(public service : GenericHttpService<T>) {
-    }
-
-    setPath(path : string) {
-        this.service.Path = path;
     }
 
     onEdit(item : T) {
@@ -32,16 +26,16 @@ export class GenericCrud<T extends GenericItem> {
         }
       }
     
-      onSave(item: T) {
+      onSave(path : string, item: T) {
         if (item.id == 0) {
-          this.add(item);
+          this.add(path, item);
         } else {
-          this.update(item);
+          this.update(path, item);
         }
       }
     
-      onDelete(item: T) {
-        this.service.delete(item.id).subscribe(() => {
+      onDelete(path : string, item: T) {
+        this.service.delete(path, item.id).subscribe(() => {
           console.log(`deleted jobstatus ${item.id}`);
         },
         (error : any) => {
@@ -53,8 +47,8 @@ export class GenericCrud<T extends GenericItem> {
         });
       }
     
-      private update(item: T) {
-        this.service.update(item).subscribe(() => {
+      private update(path : string, item: T) {
+        this.service.update(path, item).subscribe(() => {
           let log = `save successfull: ${ JSON.stringify(item) }`;
           console.log(log);
         },
@@ -66,8 +60,8 @@ export class GenericCrud<T extends GenericItem> {
         });
       }
     
-      private add(item: T) {
-        this.service.add(item).subscribe((newItem : any) => {
+      private add(path : string, item: T) {
+        this.service.add(path, item).subscribe((newItem : any) => {
           let log = `save successfull: ${ JSON.stringify(newItem) }`;
           console.log(log);
           this.collection.splice(0, 1);

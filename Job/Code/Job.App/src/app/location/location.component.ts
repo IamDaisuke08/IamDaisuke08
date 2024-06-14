@@ -12,10 +12,10 @@ import { LocationListComponent } from '../location-list/location-list.component'
 })
 export class LocationComponent implements OnInit {
 
+  path = "Locations";
   mainCollection : LocationItem[] = [];
 
   constructor(private service : GenericHttpService<LocationItem>) { 
-    this.service.Path = "Locations";
   }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class LocationComponent implements OnInit {
   
   private load()
   {
-    this.service.get().subscribe((collection : any) => {
+    this.service.get(this.path).subscribe((collection : any) => {
       console.log('status loaded');
       this.mainCollection = collection;
     },
