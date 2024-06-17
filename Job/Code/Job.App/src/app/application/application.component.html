@@ -1,9 +1,17 @@
 <h3>
     <span class="badge bg-dark text-white">Job Applications</span>
 </h3>
-<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-    <div class="col-12 d-flex justify-content-end align-items-end align-self-end">
-        <button type="button" class="btn bg-dark text-white my-2" (click)="addNew()">Add New</button>
+<div>
+    <div class="row">
+        <div class="col-3 p-3 d-flex justify-content-start align-items-start align-self-start">
+            <filter class="col" style="width: 100%;" [(filter)]="filterLoc" [list]="locations" [labelFilter]="'Filter by Location'"></filter>
+        </div>
+        <div class="col-3 p-3 d-flex justify-content-start align-items-start align-self-start">
+            <filter class="col" style="width: 100%;" [(filter)]="filterStat" [list]="status" [labelFilter]="'Filter by Status'" class="mx-3"></filter>
+        </div>
+        <div class="col d-flex justify-content-end align-items-end align-self-end">
+            <button type="button" class="btn bg-dark text-white my-2" (click)="addNew()">Add New</button>
+        </div>
     </div>
 </div>
-<application-list [collection]="mainCollection"></application-list>
+<application-list [collection]="getVisibleItems()" [locations]="locations" [status]="status"></application-list>

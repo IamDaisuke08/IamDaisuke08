@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "Controllers\\JobApplicationsController.cs",
               "ToolTip": "D:\\Main\\Job\\Code\\Job.Services\\Controllers\\JobApplicationsController.cs",
               "RelativeToolTip": "Controllers\\JobApplicationsController.cs",
-              "ViewState": "AQIAAGgAAAAAAAAAAAA8wE0AAABjAAAA",
+              "ViewState": "AQIAAGkAAAAAAAAAAAAmwE0AAABjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-13T23:55:19.536Z",
               "EditorCaption": ""
@@ -47,8 +47,7 @@
               "RelativeToolTip": "Controllers\\LocationsController.cs",
               "ViewState": "AQIAAFoAAAAAAAAAAAA4wFYAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T23:53:21.181Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-13T23:53:21.181Z"
             },
             {
               "$type": "Document",
@@ -60,8 +59,7 @@
               "RelativeToolTip": "Controllers\\JobStatusController.cs",
               "ViewState": "AQIAAAwAAAAAAAAAAAAAACkAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T23:40:37.774Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-13T23:40:37.774Z"
             }
           ]
         }

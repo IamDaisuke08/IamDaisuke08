@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GenericCrud } from '../generic-crud';
 import { ApplicationItem } from '../../shared/models/applicationItem';
 import { GenericHttpService } from '../../shared/services/generic-http.service';
 import { LocationItem } from '../../shared/models/locationItem';
 import { JobStatusItem } from '../../shared/models/jobStatusItem';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'application-list',
@@ -18,16 +18,15 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 export class ApplicationListComponent extends GenericCrud<ApplicationItem> implements OnInit {
 
   path = "JobApplications";
-  locations : LocationItem[] = [];
-  status : JobStatusItem[] = [];
+  @Input() locations : LocationItem[] = [];
+  @Input() status : JobStatusItem[] = [];
 
-  constructor(override service : GenericHttpService<ApplicationItem>) {
+  constructor(override service : GenericHttpService<ApplicationItem>, private router : Router) {
     super(service);
   }
 
   ngOnInit(): void {
-    this.loadStatus();
-    this.loadLocations();
+
   }
 
   saveApplication(item: ApplicationItem): void {
@@ -35,7 +34,7 @@ export class ApplicationListComponent extends GenericCrud<ApplicationItem> imple
   }
 
   editApplication(item: ApplicationItem): void {
-    console.log("edit clicked;");
+    this.router.navigate(["form", item.id]);
   }
 
   deleteApplication(item: ApplicationItem): void {
@@ -60,29 +59,5 @@ export class ApplicationListComponent extends GenericCrud<ApplicationItem> imple
     }
     
     return returnValue;
-  }
-
-  loadStatus() {
-    this.service.get("JobStatus").subscribe((statusCollection : any) => {
-      this.status = statusCollection;
-    },
-    (error : any) => {
-      console.log(error.message);
-    },
-    () => {
-      console.log("status loaded.")
-    });
-  }
-
-  loadLocations() {
-    this.service.get("Locations").subscribe((locCollection : any) => {
-      this.locations = locCollection;
-    },        
-    (error : any) => {
-      console.log(error.message);
-    },
-    () => {
-      console.log("locations loaded.")
-    });
   }
 }

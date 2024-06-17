@@ -1,0 +1,64 @@
+<div class="container" *ngIf="job != null || job != undefined; else showNullError">
+    <h3>
+        <span class="badge bg-dark text-white">{{ action }} Job Application</span>
+    </h3>
+    <form>
+        <div class="row mt-3">
+            <div class="col form-group">
+                <label for="companyName">Company Name:</label>
+                <input id="companyName" name="companyName" type="text" class="form-control" placeholder="Company Name" [(ngModel)]="job.companyName">
+            </div>
+            <div class="col form-group">
+                <label for="position">Position:</label>
+                <input id="position" name="position" type="text" class="form-control" placeholder="Position" [(ngModel)]="job.position">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col form-group">
+                <label for="location">Location:</label>
+                <select 
+                    id="location"
+                    name="location"
+                    class="form-select"
+                    [(ngModel)]="job.locationId">
+                        <option *ngFor="let l of locations"
+                            [value]="l.id"
+                        >{{ l.name }}</option>
+                </select>
+            </div>
+            <div class="col form-group">
+                <label for="status">Job Status:</label>
+                <select 
+                    id="status"
+                    name="status"
+                    class="form-select"
+                    [(ngModel)]="job.statusId">
+                        <option *ngFor="let s of jobStatus"
+                            [value]="s.id"    
+                        >{{ s.name }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col form-group">
+                <label for="comment">Comments:</label>
+                <textarea id="comment" name="comment" row="3" type="text" class="form-control" placeholder="put comments here..." [(ngModel)]="job.comment"></textarea>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col d-flex justify-content-end align-items-end align-self-end">
+            <button
+                type="submit"
+                class="btn btn-secondary px-3 mx-2"
+                (click)="$event.preventDefault(); saveJob()"
+                >Save</button>
+            <button type="button" class="btn btn-secondary px-3" (click)="backToMain()">Back</button>
+            </div>
+        </div>
+    </form>
+</div>
+<ng-template #showNullError>
+    <div class="container mt-5 d-flex justify-content-center align-items-center align-self-center">
+        <span class="badge bg-dark text-white" style="font-size: xx-large;">Job Application not found.</span>
+    </div>
+</ng-template>

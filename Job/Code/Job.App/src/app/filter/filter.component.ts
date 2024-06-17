@@ -19,6 +19,8 @@ export class FilterComponent implements OnInit {
   @Input() value: number = 0;
   @Output() valueChange = new EventEmitter<number>();
 
+  @Input() labelFilter : string = "";
+
   constructor() { }
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class FilterComponent implements OnInit {
     if (value == '0') {
       this.filter = () => 1 == 1;
     } else {
-      this.filter = (item : any) => item.Id == value;
+      this.filter = (item : any) => item.id == value;
     }
     this.filterChange.emit([this.filter, value]);
   }

@@ -2,11 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ApplicationItem } from '../../shared/models/applicationItem';
 import { GenericHttpService } from '../../shared/services/generic-http.service';
 import { ApplicationListComponent } from '../application-list/application-list.component';
+import { Router } from '@angular/router';
+import { FilterComponent } from '../filter/filter.component';
+import { LocationItem } from '../../shared/models/locationItem';
+import { JobStatusItem } from '../../shared/models/jobStatusItem';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'application',
   standalone: true,
-  imports: [ApplicationListComponent],
+  imports: [ApplicationListComponent, FilterComponent, CommonModule],
   templateUrl: './application.component.html',
   styleUrl: './application.component.css'
 })
@@ -14,12 +19,19 @@ export class ApplicationComponent implements OnInit {
 
   path = "JobApplications";
   mainCollection : ApplicationItem[] = [];
+  locations : LocationItem[] = [];
+  status : JobStatusItem[] = [];
 
-  constructor(private service : GenericHttpService<ApplicationItem>) { 
+  filterLoc: any; //= ()=>{};
+  filterStat: any; //= ()=>{};
+
+  constructor(private service : GenericHttpService<ApplicationItem>, private router : Router) { 
   }
 
   ngOnInit(): void {
     this.load();
+    this.loadStatus();
+    this.loadLocations();
   }
   
   private load()
@@ -33,9 +45,44 @@ export class ApplicationComponent implements OnInit {
     });
   }
 
+  getVisibleItems() : ApplicationItem[] {
+    let visibleItems = this.mainCollection;
+    if (this.filterLoc != undefined && this.filterLoc[1] != 0) {
+      visibleItems = visibleItems.filter(x => x.locationId == this.filterLoc[1]);
+    }
+
+    if (this.filterStat != undefined && this.filterStat[1] != 0) {
+      visibleItems = visibleItems.filter(x => x.statusId == this.filterStat[1]);
+    }
+
+    return visibleItems;
+  }
+
   addNew() {
-    let newApplication = new ApplicationItem(0, "", "", 0, 0, "", new Date());
-    newApplication.onEditMode = true;
-    this.mainCollection.unshift(newApplication);
+    this.router.navigate(["form", "0"]);
+  }
+
+  loadStatus() {
+    this.service.get("JobStatus").subscribe((statusCollection : any) => {
+      this.status = statusCollection;
+    },
+    (error : any) => {
+      console.log(error.message);
+    },
+    () => {
+      console.log("status loaded.")
+    });
+  }
+
+  loadLocations() {
+    this.service.get("Locations").subscribe((locCollection : any) => {
+      this.locations = locCollection;
+    },        
+    (error : any) => {
+      console.log(error.message);
+    },
+    () => {
+      console.log("locations loaded.")
+    });
   }
 }

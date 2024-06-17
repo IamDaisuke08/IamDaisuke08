@@ -30,9 +30,14 @@ export class GenericHttpService<T extends GenericItem> extends CustomHttpHandler
     return this.baseUrl + path;
   }
 
-  get(path: string) {
+  get(path : string) {
     let options = this.getStandarOptions();
     return this.client.get(this.getCompletePath(path), options).pipe(catchError(this.handleError));
+  }
+
+  getById(path : string, id : number) {
+    let options = this.getStandarOptions();
+    return this.client.get(this.getCompletePath(path) + "/" + id, options).pipe(catchError(this.handleError));
   }
 
   update(path : string, item : T) {
