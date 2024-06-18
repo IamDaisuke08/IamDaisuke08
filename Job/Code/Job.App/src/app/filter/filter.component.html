@@ -1,7 +1,7 @@
 <div class="form-floating">
     <select
-        id="filter-name"
-        name="filter-name"
+        [attr.id]="labelFilter"
+        [attr.name]="labelFilter"
         class="form-select" 
         [(ngModel)]="value"
         (ngModelChange)="updateFilter($event)">
@@ -10,5 +10,5 @@
                 [value]="item.id"
             >{{ item.name }}</option>
     </select>
-    <label for="filter-name">{{ labelFilter }} </label>
+    <label [attr.for]="labelFilter">{{ labelFilter }}</label>
 </div>

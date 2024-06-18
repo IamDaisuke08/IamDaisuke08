@@ -22,6 +22,7 @@ export class ApplicationComponent implements OnInit {
   locations : LocationItem[] = [];
   status : JobStatusItem[] = [];
 
+  filterCompany: any; //= ()=>{};
   filterLoc: any; //= ()=>{};
   filterStat: any; //= ()=>{};
 
@@ -33,7 +34,7 @@ export class ApplicationComponent implements OnInit {
     this.loadStatus();
     this.loadLocations();
   }
-  
+
   private load()
   {
     this.service.get(this.path).subscribe((collection : any) => {
@@ -43,23 +44,6 @@ export class ApplicationComponent implements OnInit {
     (error : any) => {
       alert(error.message);
     });
-  }
-
-  getVisibleItems() : ApplicationItem[] {
-    let visibleItems = this.mainCollection;
-    if (this.filterLoc != undefined && this.filterLoc[1] != 0) {
-      visibleItems = visibleItems.filter(x => x.locationId == this.filterLoc[1]);
-    }
-
-    if (this.filterStat != undefined && this.filterStat[1] != 0) {
-      visibleItems = visibleItems.filter(x => x.statusId == this.filterStat[1]);
-    }
-
-    return visibleItems;
-  }
-
-  addNew() {
-    this.router.navigate(["form", "0"]);
   }
 
   loadStatus() {
@@ -84,5 +68,32 @@ export class ApplicationComponent implements OnInit {
     () => {
       console.log("locations loaded.")
     });
+  }
+
+  filterUniqueCompanies() : { id : string, name : string} [] {
+    let filtered : { id : string, name : string}[] = [];
+    this.mainCollection.map(m => filtered.filter(f => f.name == m.companyName).length > 0 ? null : filtered.push({id : m.companyName, name : m.companyName}));
+    return filtered;
+  }
+
+  getVisibleItems() : ApplicationItem[] {
+    let visibleItems = this.mainCollection;
+    if (this.filterCompany != undefined && this.filterCompany[1] != 0) {
+      visibleItems = visibleItems.filter(x => x.companyName == this.filterCompany[1]);
+    }
+
+    if (this.filterLoc != undefined && this.filterLoc[1] != 0) {
+      visibleItems = visibleItems.filter(x => x.locationId == this.filterLoc[1]);
+    }
+
+    if (this.filterStat != undefined && this.filterStat[1] != 0) {
+      visibleItems = visibleItems.filter(x => x.statusId == this.filterStat[1]);
+    }
+
+    return visibleItems;
+  }
+
+  addNew() {
+    this.router.navigate(["form", "0"]);
   }
 }
