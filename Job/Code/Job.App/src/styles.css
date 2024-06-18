@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background-image: url(../public/bg.png);
+}
+
+.content {
+    background-color: ghostwhite;
+    border-radius:.5rem!important
+}
+
+.bg-blue {
+    background-color: #246AAD;
+    color: aliceblue;
+}
+
+.bg-btn-blue {
+    background-color: #539ED7;
+    color: aliceblue;
+}
+
+.nav-custom {
+    color: aliceblue;
+    padding: 0 .5rem 0 .5rem;
+    margin: .5rem;
+    font-size: x-large;
+    text-decoration: none;
+}
+
+.nav-custom:hover {
+    color: aliceblue;
+    background-color: #539ED7;
+    border-radius:.25rem!important
+}
+
+.nav-custom:focus {
+    color: aliceblue;
+}
+
+.content-header {
+    color: aliceblue;
+    background-color: #539ED7;
+    border-radius:.25rem!important;
+    padding: .5em;
+}

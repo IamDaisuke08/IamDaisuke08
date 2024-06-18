@@ -49,6 +49,7 @@ export class ApplicationComponent implements OnInit {
   loadStatus() {
     this.service.get("JobStatus").subscribe((statusCollection : any) => {
       this.status = statusCollection;
+      this.status.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
     },
     (error : any) => {
       console.log(error.message);
@@ -61,6 +62,7 @@ export class ApplicationComponent implements OnInit {
   loadLocations() {
     this.service.get("Locations").subscribe((locCollection : any) => {
       this.locations = locCollection;
+      this.locations.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
     },        
     (error : any) => {
       console.log(error.message);
@@ -73,7 +75,7 @@ export class ApplicationComponent implements OnInit {
   filterUniqueCompanies() : { id : string, name : string} [] {
     let filtered : { id : string, name : string}[] = [];
     this.mainCollection.map(m => filtered.filter(f => f.name == m.companyName).length > 0 ? null : filtered.push({id : m.companyName, name : m.companyName}));
-    return filtered;
+    return filtered.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
   }
 
   getVisibleItems() : ApplicationItem[] {

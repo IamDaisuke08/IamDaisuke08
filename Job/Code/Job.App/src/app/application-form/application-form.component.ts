@@ -39,10 +39,12 @@ export class ApplicationFormComponent extends GenericCrud<ApplicationItem> imple
 
     this.service.get("Locations").subscribe((locs : any) => {
       this.locations = locs;
+      this.locations.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
     });
 
     this.service.get("JobStatus").subscribe((status: any) =>{
       this.jobStatus = status;
+      this.jobStatus.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
     });
 
     if (this.id != 0) {
