@@ -1,9 +1,9 @@
-<div *ngIf="collection.length == 0; else showJobStatus">
+<div *ngIf="collection.length == 0; else showApplications">
     <div class="container mt-5 d-flex justify-content-center align-items-center align-self-center">
         <h3 class="content-header">No Job Applications to show at the moment. Consider adding one via AddNew button. :P</h3>
     </div>
 </div>
-<ng-template #showJobStatus>
+<ng-template #showApplications>
     <div class="pb-2">
         <table class="table table-sm table-striped table-bordered table-hover round-corner">
             <thead class="bg-blue">

@@ -1,0 +1,12 @@
+<div *ngIf="collection.length == 0; else showApplications">
+    <div class="container mt-5 d-flex justify-content-center align-items-center align-self-center">
+        <h3 class="content-header">No Job Applications to show at the moment. Consider adding one via AddNew button. :P</h3>
+    </div>
+</div>
+<ng-template #showApplications>
+    <div class="pb-2" style="text-align: center;">
+        <div *ngFor="let item of collection" class="box-item">
+            <application-box [item]="item" [status]="status" [locations]="locations"></application-box>
+        </div>
+    </div>
+</ng-template>

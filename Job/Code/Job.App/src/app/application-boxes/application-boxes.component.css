@@ -1,0 +1,6 @@
+.box-item {
+    display: inline-block; 
+    width: 25rem; 
+    height: 10rem; 
+    margin:auto;
+}

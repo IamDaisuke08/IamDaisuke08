@@ -1,0 +1,12 @@
+<a routerLink="/form/{{ item.id }}" class="box-link">
+    <div class="box-div" [hintText]="toolTip">
+        <div>
+            <img class="box-img" src="{{ imageName }}">
+        </div>
+        <div class="box-text">
+            <strong>{{ item.companyName }}</strong><br>
+            <div class="box-left">{{ item.position }}</div>
+            <div class="box-right">{{ item.createdDate | date: 'ddMMMYY' }}</div>
+        </div>
+    </div>
+</a>

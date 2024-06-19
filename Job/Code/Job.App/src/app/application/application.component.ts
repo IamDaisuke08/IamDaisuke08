@@ -7,11 +7,12 @@ import { FilterComponent } from '../filter/filter.component';
 import { LocationItem } from '../../shared/models/locationItem';
 import { JobStatusItem } from '../../shared/models/jobStatusItem';
 import { CommonModule } from '@angular/common';
+import { ApplicationBoxesComponent } from '../application-boxes/application-boxes.component';
 
 @Component({
   selector: 'application',
   standalone: true,
-  imports: [ApplicationListComponent, FilterComponent, CommonModule],
+  imports: [ApplicationListComponent, FilterComponent, CommonModule, ApplicationBoxesComponent],
   templateUrl: './application.component.html',
   styleUrl: './application.component.css'
 })
@@ -22,17 +23,17 @@ export class ApplicationComponent implements OnInit {
   locations : LocationItem[] = [];
   status : JobStatusItem[] = [];
 
-  filterCompany: any; //= ()=>{};
-  filterLoc: any; //= ()=>{};
-  filterStat: any; //= ()=>{};
+  filterCompany: any;
+  filterLoc: any;
+  filterStat: any;
 
   constructor(private service : GenericHttpService<ApplicationItem>, private router : Router) { 
   }
 
   ngOnInit(): void {
-    this.load();
     this.loadStatus();
     this.loadLocations();
+    this.load();
   }
 
   private load()
