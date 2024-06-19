@@ -17,6 +17,13 @@ body {
     color: aliceblue;
 }
 
+.app-title {
+    color: aliceblue;
+    font-size: x-large;
+    font-weight: bold;
+    padding: 0 1rem 0 1rem;
+}
+
 .nav-custom {
     color: aliceblue;
     padding: 0 .5rem 0 .5rem;

@@ -3,18 +3,18 @@
         Job Applications
     </h3>
     <div>
-        <div class="row">
-            <div class="col-3 p-3 d-flex justify-content-start align-items-start align-self-start">
-                <filter class="col" style="width: 100%;" [(filter)]="filterCompany" [list]="filterUniqueCompanies()" [labelFilter]="'Filter by Company'"></filter>
+        <div class="d-flex">
+            <div class="col-3 p-3">
+                <filter class="col sub-header-control" [(filter)]="filterCompany" [list]="filterUniqueCompanies()" [labelFilter]="'Filter by Company'"></filter>
             </div>
-            <div class="col-3 p-3 d-flex justify-content-start align-items-start align-self-start">
-                <filter class="col" style="width: 100%;" [(filter)]="filterLoc" [list]="locations" [labelFilter]="'Filter by Location'"></filter>
+            <div class="col-3 p-3">
+                <filter class="col sub-header-control" [(filter)]="filterLoc" [list]="locations" [labelFilter]="'Filter by Location'"></filter>
             </div>
-            <div class="col-3 p-3 d-flex justify-content-start align-items-start align-self-start">
-                <filter class="col" style="width: 100%;" [(filter)]="filterStat" [list]="status" [labelFilter]="'Filter by Status'"></filter>
+            <div class="col-3 p-3">
+                <filter class="col sub-header-control" [(filter)]="filterStat" [list]="status" [labelFilter]="'Filter by Status'"></filter>
             </div>
-            <div class="col d-flex justify-content-end align-items-end align-self-end">
-                <button type="button" class="btn bg-btn-blue my-2" (click)="addNew()">Add New</button>
+            <div class="col-3 p-3">
+                <button type="button" class="btn bg-btn-blue add-new-btn sub-header-control" (click)="addNew()">Add New</button>
             </div>
         </div>
     </div>
