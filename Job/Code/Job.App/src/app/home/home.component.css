@@ -1,6 +1,6 @@
 .home-section {
     margin: 1rem 0 1rem 0;
-    height: 30rem; /*hero-bg-01*/
+    min-height: 30rem; /*hero-bg-01*/
     position: relative;
 }
 
@@ -40,7 +40,7 @@
     height: 20rem;
     width: 15rem;
     padding: 1rem;
-    margin: 5rem 3rem 3rem 3rem;
+    margin: 3rem 3rem 3rem 3rem;
 }
 
 .footer {
@@ -50,4 +50,8 @@
     margin: auto;
     padding: 3.5rem;
     font-size: small;
+    background-color: #539ED7;
+    border: 1px solid #539ED7;
+    border-top-right-radius: 4rem!important;
+    border-bottom-left-radius: 4rem!important;
 }
