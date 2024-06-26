@@ -1,6 +1,6 @@
-.box-item {
-    display: inline-block;
-    width: 25rem; 
-    height: 10rem; 
-    margin:auto;
+.application-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    padding-bottom: 1.5rem;
 }

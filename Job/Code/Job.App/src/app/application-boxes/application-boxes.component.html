@@ -4,8 +4,8 @@
     </div>
 </div>
 <ng-template #showApplications>
-    <div class="pb-2" style="text-align: center;">
-        <div *ngFor="let item of collection" class="box-item">
+    <div class="application-container">
+        <div *ngFor="let item of collection">
             <application-box [item]="item" [status]="status" [locations]="locations"></application-box>
         </div>
     </div>

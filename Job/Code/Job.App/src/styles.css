@@ -2,9 +2,23 @@ body {
     background-image: url(../public/bg.png);
 }
 
+.app-title {
+    color: aliceblue;
+    font-size: x-large;
+    font-weight: bold;
+    padding: 0 1rem 0 1rem;
+}
+
 .content {
     background-color: ghostwhite;
     border-radius:.5rem!important
+}
+
+.content-header {
+    color: aliceblue;
+    background-color: #539ED7;
+    border-radius:.25rem!important;
+    padding: .5em;
 }
 
 .bg-blue {
@@ -17,13 +31,6 @@ body {
     color: aliceblue;
 }
 
-.app-title {
-    color: aliceblue;
-    font-size: x-large;
-    font-weight: bold;
-    padding: 0 1rem 0 1rem;
-}
-
 .nav-custom {
     color: aliceblue;
     padding: 0 .5rem 0 .5rem;
@@ -32,19 +39,11 @@ body {
     text-decoration: none;
 }
 
-.nav-custom:hover {
-    color: aliceblue;
-    background-color: #539ED7;
-    border-radius:.25rem!important
-}
-
-.nav-custom:focus {
-    color: aliceblue;
-}
-
-.content-header {
+.nav-custom:hover,
+.nav-custom:focus,
+.nav-custom[nav-selected=true] {
     color: aliceblue;
     background-color: #539ED7;
     border-radius:.25rem!important;
-    padding: .5em;
+    cursor: pointer;
 }

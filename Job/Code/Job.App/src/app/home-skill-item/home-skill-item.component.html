@@ -1,6 +1,6 @@
 <div class="box-skill">
     <div>
-        <img class="skill-icon" src="{{ imageName }}">
+        <img class="skill-icon" [src]="imageName">
     </div>
     <div class="skill-box-desc">
         <h5>{{ skillName }}</h5>
@@ -8,11 +8,11 @@
             <label class="skill-text">Proficiency:</label>
             <label class="skill-value">{{ proficiencyValue }}</label>
         </div>
-        <div style="display: flex;">
+        <div class="skill-desc">
             <label class="skill-text">Experience:</label>
             <label class="skill-value">{{ experienceValue }}</label>
         </div>
-        <div style="display: flex;">
+        <div class="skill-desc">
             <label class="skill-text">Go-to:</label>
             <label class="skill-value">{{ gotoValue }}</label>
         </div>

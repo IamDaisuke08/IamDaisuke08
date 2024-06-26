@@ -1,8 +1,6 @@
-.add-new-btn {
-    height: 58px;
-    font-size: large;
-}
-
-.sub-header-control {
-    width: 100%;
+.filter-control {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+    margin: 1.5rem 0 1.5rem 0;
 }
