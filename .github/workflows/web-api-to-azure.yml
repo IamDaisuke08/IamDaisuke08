@@ -28,21 +28,17 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restore
-        working-directory: ${{ env.API_DIRECTORY }}
-        run: dotnet restore
+        run: dotnet restore ${{ env.API_DIRECTORY }}
 
       - name: Build
-        working-directory: ${{ env.API_DIRECTORY }}
-        run: dotnet build --no-restore -c Release
+        run: dotnet build ${{ env.API_DIRECTORY }} --no-restore -c Release
 
       - name: Publish
-        working-directory: ${{ env.API_DIRECTORY }}
-        run: dotnet publish --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        run: dotnet publish ${{ env.API_DIRECTORY }} --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
         
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         with:
-          working-directory: ${{ env.API_DIRECTORY }}
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PROFILE }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
