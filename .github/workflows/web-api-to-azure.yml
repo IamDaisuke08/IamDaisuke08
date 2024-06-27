@@ -1,7 +1,7 @@
 name: Build and deploy Web API
 
 env:
-  AZURE_WEBAPP_NAME: 'Daisuke Service'          # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME: 'daisuke'          # set this to the name of your Azure Web App
   AZURE_WEBAPP_PACKAGE_PATH: './published'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '8.0'                         # set this to the .NET Core version to use
   API_DIRECTORY: './Job/Code/Job.Services'      # points to the correct directory
