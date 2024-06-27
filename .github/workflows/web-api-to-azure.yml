@@ -6,10 +6,7 @@ env:
   DOTNET_VERSION: '8.0'                         # set this to the .NET Core version to use
   API_DIRECTORY: './Job/Code/Job.Services'      # points to the correct directory
   
-on:
-  push:
-    branches: [ "main" ]
-  workflow_dispatch:
+on: [workflow_dispatch]
 
 permissions:
   contents: read
