@@ -1,0 +1,51 @@
+name: Build and deploy Web API
+
+env:
+  AZURE_WEBAPP_NAME: 'Daisuke Service'          # set this to the name of your Azure Web App
+  AZURE_WEBAPP_PACKAGE_PATH: './published'      # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '8.0'                         # set this to the .NET Core version to use
+  API_DIRECTORY: './Job/Code/Job.Services'      # points to the correct directory
+  
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and Deploy Web Api
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore
+        working-directory: ${{ env.API_DIRECTORY }}
+        run: dotnet restore
+
+      - name: Build
+        working-directory: ${{ env.API_DIRECTORY }}
+        run: dotnet build --no-restore -c Release
+
+      - name: Publish
+        working-directory: ${{ env.API_DIRECTORY }}
+        run: dotnet publish --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        
+      - name: 'Deploy to Azure Web App'
+        uses: azure/webapps-deploy@v2
+        with:
+          working-directory: ${{ env.API_DIRECTORY }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+
+        
