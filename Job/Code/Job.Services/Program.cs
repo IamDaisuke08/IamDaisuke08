@@ -21,11 +21,14 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 
 // add database services.
-var configuration = new ConfigurationBuilder()
-    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-    .AddJsonFile("appsettings.json")
-    .Build();
-builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+//var configuration = new ConfigurationBuilder()
+//    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+//    .AddJsonFile("appsettings.json")
+//    .AddEnvironmentVariables()
+//    .Build();
+
+
+builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("JobConnection")));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
