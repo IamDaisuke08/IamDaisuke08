@@ -3,11 +3,13 @@
 
 name: Build and deploy ASP.Net Core app to Azure Web App - myjobappservice
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+env:
+  AZURE_WEBAPP_NAME: 'myjobappservice'
+  AZURE_WEBAPP_PACKAGE_PATH: './published' 
+  DOTNET_VERSION: '8.0'
+  API_DIRECTORY: './Job/Code/Job.Services'
+
+on: [workflow_dispatch]
 
 jobs:
   build:
@@ -19,19 +21,22 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.x'
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      - name: Restore
+        run: dotnet restore ${{ env.API_DIRECTORY }}
+        
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build ${{ env.API_DIRECTORY }} --no-restore -c Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish ${{ env.API_DIRECTORY }} --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
   deploy:
     runs-on: windows-latest
@@ -59,7 +64,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'myjobappservice'
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'Production'
           package: .
           
