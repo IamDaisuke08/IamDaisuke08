@@ -32,3 +32,38 @@ hr {
     text-align: 
     center; margin: auto;
 }
+
+.soft-skill {
+    display: flex;
+    padding : 2rem;
+    justify-content: center;
+}
+
+.soft-skill-image {
+    border: 1px lightgrey solid;
+    width: 22rem;
+    flex-shrink: 0;
+}
+
+.soft-skill-text {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 20rem;
+    padding: 2rem 2rem 2rem 0;
+}
+
+.growth {
+    flex-wrap: wrap; 
+}
+
+.growth-text {
+    padding: 2rem 0 2rem 2rem;
+}
+
+.leadership {
+    flex-wrap: wrap-reverse; 
+}
+
+.leadership-text {
+    padding: 2rem 2rem 2rem 0;
+}

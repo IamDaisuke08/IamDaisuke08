@@ -1,6 +1,18 @@
 .filter-control {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    
     gap: 2rem;
     margin: 1.5rem 0 1.5rem 0;
+}
+
+@media (min-width: 30rem) {
+    .filter-control {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 70rem) {
+    .filter-control {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }
