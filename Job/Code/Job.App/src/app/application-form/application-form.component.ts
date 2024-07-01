@@ -67,9 +67,9 @@ export class ApplicationFormComponent extends GenericCrud<ApplicationItem> imple
   }
 
   backToMain() {
-    this.router.navigate(['application'])
-      .then(() => {
-        window.location.reload();
-      });
+    this.router.navigate(['application']);
+      // .then(() => {
+      //   window.location.reload();
+      // });
   }
 }
