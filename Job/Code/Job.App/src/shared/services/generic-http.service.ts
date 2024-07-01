@@ -3,13 +3,14 @@ import { CustomHttpHandlers } from './customHtttpHandler';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs';
 import { GenericItem } from '../models/genericItem';
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class GenericHttpService<T extends GenericItem> extends CustomHttpHandlers {
 
-  private baseUrl : string = "http://localhost:5202/api/";
+  private baseUrl : string = `${ environment.API_URL }api/`; //"http://localhost:5202/api/";
 
   constructor(private client : HttpClient) 
   { 
@@ -19,7 +20,7 @@ export class GenericHttpService<T extends GenericItem> extends CustomHttpHandler
   private getStandarOptions() : any {
     return {
       headers : new HttpHeaders({
-        'Access-Control-Allow-Origin': 'http://localhost:5202/',
+        'Access-Control-Allow-Origin': environment.API_URL,
         'Access-Control-Allow-Credentials': 'true',
         'Content-Type': 'application/json',
       })
