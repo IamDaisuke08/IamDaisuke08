@@ -2,13 +2,6 @@ body {
     background-image: url(../public/bg.png);
 }
 
-.app-title {
-    color: aliceblue;
-    font-size: x-large;
-    font-weight: bold;
-    padding: 0 1rem 0 1rem;
-}
-
 .content {
     background-color: ghostwhite;
     border-radius:.5rem!important
@@ -29,14 +22,6 @@ body {
 .bg-btn-blue {
     background-color: #539ED7;
     color: aliceblue;
-}
-
-.nav-custom {
-    color: aliceblue;
-    padding: 0 .5rem 0 .5rem;
-    margin: .5rem;
-    font-size: x-large;
-    text-decoration: none;
 }
 
 .nav-custom:hover,

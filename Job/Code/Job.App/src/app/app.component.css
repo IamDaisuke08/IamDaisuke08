@@ -1,0 +1,40 @@
+.app-header {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.app-logo {
+    display: flex;
+    flex-grow: 1;
+}
+
+.app-logo a {
+    text-decoration: none;
+    margin-top: .3rem;
+}
+
+.app-logo img {
+    width: 40px; 
+    height: 40px;
+}
+
+.app-logo label {
+    color: aliceblue;
+    font-size: x-large;
+    font-weight: bold;
+    padding: .5rem 1rem .5rem 1rem;
+}
+
+.nav-list {
+    flex-grow: 0;
+    justify-content: right;
+}
+
+.nav-custom {
+    color: aliceblue;
+    padding: 0 .5rem 0 .5rem;
+    margin: .5rem;
+    font-size: x-large;
+    text-decoration: none;
+}

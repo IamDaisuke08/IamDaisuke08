@@ -2,17 +2,5 @@
     display: grid;
     gap: 2rem;
     padding-bottom: 1.5rem;
-}
-
-
-@media (min-width: 50rem) {
-    .application-container {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media (min-width: 80rem) {
-    .application-container {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 }

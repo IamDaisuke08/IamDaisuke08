@@ -1,14 +1,14 @@
 <header class="p-3 bg-blue">
   <div class="container">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-      <div style="flex-grow: 1; display: flex;">
-        <a href="/" class="text-decoration-none">
-          <img style="width: 40px; height: 40px;" src="daisuke_08.PNG">
+    <div class="app-header">
+      <div class="app-logo">
+        <a href="/">
+          <img src="daisuke_08.PNG">
         </a>
-        <label class="app-title">Ðaisuke08 Inc.</label>
+        <label>Ðaisuke08 Inc.</label>
       </div>
 
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="flex-grow: 0;">
+      <ul class="nav nav-list">
         <li><a routerLink="" class="nav-link nav-custom" [attr.nav-selected]="navBars[0]" (click)="setSelected('home')">Home</a></li>
         <li><a routerLink="application" class="nav-link nav-custom" [attr.nav-selected]="navBars[1]" (click)="setSelected('application')">Application</a></li> 
         <li><a routerLink="location" class="nav-link nav-custom" [attr.nav-selected]="navBars[2]" (click)="setSelected('location')">Locations</a></li>
