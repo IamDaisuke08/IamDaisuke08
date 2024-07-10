@@ -1,18 +1,18 @@
 .box-skill {
     border: 1px solid lightgray;
     box-shadow: 0rem .5rem 1rem grey;
-    height: 20rem;
+    height: 25rem;
     width: 15rem;
     padding: 1rem;
 }
 
 .skill-icon {
-    height: 10rem; 
+    height: 15rem; 
     width: 100%;
 }
 
 .skill-box-desc {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .skill-desc {
@@ -27,4 +27,8 @@
 
 .skill-value {
     flex-grow: 0;
+}
+
+.long-desc {
+    font-size: small;
 }
