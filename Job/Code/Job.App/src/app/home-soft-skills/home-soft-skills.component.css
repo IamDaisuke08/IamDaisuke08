@@ -13,6 +13,8 @@
 .soft-skill-image {
     border: 1px solid var(--border-color);
     flex-shrink: 0;
+    height: 20rem;
+    width: 30rem;
 }
 
 .soft-skill-text {
@@ -40,5 +42,18 @@
 }
 
 .leadership-text {
-    padding-left: 2rem;
+    text-align: right;
+}
+
+@media (max-width: 75rem) {
+    .leadership-text {
+        text-align: left;
+    }
+}
+
+@media (max-width: 30rem) {
+    .soft-skill-image {
+        width: 23rem;
+        height: 13rem;
+    }
 }
