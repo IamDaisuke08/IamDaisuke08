@@ -7,23 +7,25 @@
 .app-logo {
     display: flex;
     flex-grow: 1;
+    margin-block: auto;
 }
 
 .app-logo a {
     text-decoration: none;
-    margin-top: .3rem;
 }
 
 .app-logo img {
     width: 40px; 
     height: 40px;
+
 }
 
 .app-logo label {
-    color: aliceblue;
+    color: var(--header-txt);
     font-size: x-large;
     font-weight: bold;
-    padding: .5rem 1rem .5rem 1rem;
+    padding-left: .5rem;
+    margin-block: auto;
 }
 
 .nav-list {
@@ -32,9 +34,16 @@
 }
 
 .nav-custom {
-    color: aliceblue;
-    padding: 0 .5rem 0 .5rem;
-    margin: .5rem;
+    color: var(--header-txt);
     font-size: x-large;
     text-decoration: none;
+}
+
+.nav-mobile-bar {
+    text-decoration: none;
+    color: var(--header-txt);
+    display: none;
+    font-size: x-large;
+    margin-block: auto;
+    cursor: pointer;
 }

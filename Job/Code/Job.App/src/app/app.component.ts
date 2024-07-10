@@ -10,6 +10,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+setDisplay() {
+throw new Error('Method not implemented.');
+}
   title = 'job.app';
   navBars = new Array(4).fill(false);
 

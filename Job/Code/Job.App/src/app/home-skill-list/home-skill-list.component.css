@@ -1,3 +1,8 @@
+.skills-description {
+    margin-block: 2rem;
+    text-align: center;
+}
+
 .skills {
     display: flex;
     flex-wrap: wrap;

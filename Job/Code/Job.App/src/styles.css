@@ -1,34 +1,83 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
 body {
     background-image: url(../public/bg.png);
+    --white-txt: #f8f8ff;
+    --blue-light: #539ED7;
+    --blue-drk : #246AAD;
+    --blue-drkr : #053664;
+    --light-grey : #d3d3d3;
+
+    --theme-bg-color: var(--white-txt);
+    --theme-btn-bg-color: var(--blue-light);
+    --theme-btn-bg-color-drk: var(--blue-drk);
+
+    --header-bg-color: var(--blue-drk);
+    --header-sub-bg-color: var(--blue-light);
+    --header-txt: var(--white-txt);
+
+    --footer-bg-color: var(--blue-light);
+
+    --table-hdr-bg-color: var(--blue-drk);
+    --table-hdr-txt-color: var(--white-txt);
+
+    --btn-bg: var(--blue-light);
+    --btn-txt: var(--white-txt);
+    --btn-brdr: var(--blue-drk);
+
+    --border-color: var(--light-grey);
+
+    font-family: Tahoma, 'Segoe UI', Geneva, Verdana, sans-serif;
+}
+
+header {
+    background-color: var(--header-bg-color);
+    color: var(--header-txt);
+}
+
+thead {
+    background-image: linear-gradient(var(--blue-drk), var(--blue-drkr));
+    background-color: var(--table-hdr-bg-color);
+    color: var(--table-hdr-txt-color);
+}
+
+h1, h2, h3, h4, h5, h6, ul, p {
+    padding: 0;
+    margin: 0;
 }
 
 .content {
-    background-color: ghostwhite;
-    border-radius:.5rem!important
+    background-color: var(--theme-bg-color);
+    border-radius:.5rem!important;
+    margin-top: 1rem;
+    padding: 0;
 }
 
 .content-header {
-    color: aliceblue;
-    background-color: #539ED7;
+    background-image: linear-gradient(var(--btn-bg), var(--btn-brdr));
+    color: var(--header-txt);
+    background-color: var(--header-sub-bg-color);
     border-radius:.25rem!important;
     padding: .5em;
-}
-
-.bg-blue {
-    background-color: #246AAD;
-    color: aliceblue;
-}
-
-.bg-btn-blue {
-    background-color: #539ED7;
-    color: aliceblue;
+    text-align: center;
 }
 
 .nav-custom:hover,
 .nav-custom:focus,
 .nav-custom[nav-selected=true] {
-    color: aliceblue;
-    background-color: #539ED7;
+    background-color: var(--theme-btn-bg-color);
     border-radius:.25rem!important;
     cursor: pointer;
+}
+
+.btn-theme {
+    background-image: linear-gradient(var(--btn-bg), var(--btn-brdr));
+    background-color: var(--btn-bg);
+    color: var(--btn-txt);
+    border-color: var(--btn-brdr);
+
 }

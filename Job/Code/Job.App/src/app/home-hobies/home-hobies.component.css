@@ -1,0 +1,17 @@
+.hobies-desc {
+    padding-block: 2rem;
+    text-align: center;
+}
+
+.hobby-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    padding-inline: 1rem;
+}
+
+.hobby-item {
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: .5rem;
+}

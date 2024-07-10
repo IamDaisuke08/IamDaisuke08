@@ -1,4 +1,4 @@
-<header class="p-3 bg-blue">
+<header class="p-3">
   <div class="container">
     <div class="app-header">
       <div class="app-logo">
@@ -17,6 +17,10 @@
         <li><a href="#" class="nav-link nav-custom">About</a></li> -->
       </ul>
 
+      <a class="nav-mobile-bar icon" (click)="setDisplay()">
+        <i class="fa fa-bars"></i>
+      </a>
+
       <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
         <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
       </form>
@@ -28,6 +32,6 @@
     </div>
   </div>
 </header>
-<div class="container content mt-3 mb-3">
+<div class="container content">
   <router-outlet />
 </div>

@@ -7,7 +7,7 @@
             <filter class="col sub-header-control" [(filter)]="filterCompany" [list]="filterUniqueCompanies()" [labelFilter]="'Filter by Company'"></filter>
             <filter class="col sub-header-control" [(filter)]="filterLoc" [list]="locations" [labelFilter]="'Filter by Location'"></filter>
             <filter class="col sub-header-control" [(filter)]="filterStat" [list]="status" [labelFilter]="'Filter by Status'"></filter>
-            <button type="button" class="btn bg-btn-blue" (click)="addNew()">Add New Application</button>
+            <button type="button" class="btn btn-theme" (click)="addNew()">Add New Application</button>
         </div>
     </div>
     <!-- <application-list [collection]="getVisibleItems()" [locations]="locations" [status]="status"></application-list> -->

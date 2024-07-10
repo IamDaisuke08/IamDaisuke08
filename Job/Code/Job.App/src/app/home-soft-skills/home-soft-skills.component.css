@@ -1,0 +1,33 @@
+.soft-skill-desc {
+    margin-block: 2rem;
+    text-align: center;
+}
+
+.soft-skill {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding-inline: 1.5rem;
+}
+
+.soft-skill-image {
+    border: 1px solid var(--border-color);
+    width: 22rem;
+    flex-shrink: 0;
+}
+
+.soft-skill-text {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 20rem;
+    margin-top: 2rem;
+}
+
+.growth {
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.leadership {
+    flex-wrap: wrap-reverse; 
+}
