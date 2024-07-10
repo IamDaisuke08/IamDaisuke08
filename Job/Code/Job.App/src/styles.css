@@ -11,10 +11,12 @@ body {
     --blue-drk : #246AAD;
     --blue-drkr : #053664;
     --light-grey : #d3d3d3;
+    --transparent-blue: #539ed7f1;
 
     --theme-bg-color: var(--white-txt);
     --theme-btn-bg-color: var(--blue-light);
     --theme-btn-bg-color-drk: var(--blue-drk);
+    --theme-mobile-menu-bg : var(--transparent-blue);
 
     --header-bg-color: var(--blue-drk);
     --header-sub-bg-color: var(--blue-light);
@@ -64,14 +66,6 @@ h1, h2, h3, h4, h5, h6, ul, p {
     border-radius:.25rem!important;
     padding: .5em;
     text-align: center;
-}
-
-.nav-custom:hover,
-.nav-custom:focus,
-.nav-custom[nav-selected=true] {
-    background-color: var(--theme-btn-bg-color);
-    border-radius:.25rem!important;
-    cursor: pointer;
 }
 
 .btn-theme {

@@ -8,14 +8,16 @@
         <label>Ðaisuke08 Inc.</label>
       </div>
 
-      <ul class="nav nav-list">
-        <li><a routerLink="" class="nav-link nav-custom" [attr.nav-selected]="navBars[0]" (click)="setSelected('home')">Home</a></li>
-        <li><a routerLink="application" class="nav-link nav-custom" [attr.nav-selected]="navBars[1]" (click)="setSelected('application')">Application</a></li> 
-        <li><a routerLink="location" class="nav-link nav-custom" [attr.nav-selected]="navBars[2]" (click)="setSelected('location')">Locations</a></li>
-        <li><a routerLink="job-status" class="nav-link nav-custom" [attr.nav-selected]="navBars[3]" (click)="setSelected('jobstatus')">Job Status</a></li>
-        <!-- <li><a href="#" class="nav-link nav-custom">FAQs</a></li>
-        <li><a href="#" class="nav-link nav-custom">About</a></li> -->
-      </ul>
+      <div class="nav-holder" [style.display]="navDisplay">
+        <ul class="navigation">
+          <li><a routerLink="" class="nav-custom" [attr.nav-selected]="navBars[0]" (click)="setSelected('home')">Home</a></li>
+          <li><a routerLink="application" class="nav-custom" [attr.nav-selected]="navBars[1]" (click)="setSelected('application')">Application</a></li> 
+          <li><a routerLink="location" class="nav-custom" [attr.nav-selected]="navBars[2]" (click)="setSelected('location')">Locations</a></li>
+          <li><a routerLink="job-status" class="nav-custom" [attr.nav-selected]="navBars[3]" (click)="setSelected('jobstatus')">Job Status</a></li>
+          <!-- <li><a href="#" class="nav-link nav-custom">FAQs</a></li>
+          <li><a href="#" class="nav-link nav-custom">About</a></li> -->
+        </ul>
+      </div>
 
       <a class="nav-mobile-bar icon" (click)="setDisplay()">
         <i class="fa fa-bars"></i>

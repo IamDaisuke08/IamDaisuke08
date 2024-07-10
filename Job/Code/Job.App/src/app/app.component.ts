@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,28 @@ import { RouterModule } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-setDisplay() {
-throw new Error('Method not implemented.');
-}
-  title = 'job.app';
+export class AppComponent implements OnInit {
+
+  navDisplay: string = 'block';
   navBars = new Array(4).fill(false);
+  showingMobileBar : boolean = false;
+
+  constructor(public breakepoint : BreakpointObserver) {
+  }
+
+  ngOnInit(): void {
+    this.breakepoint
+    .observe(['(max-width: 62rem)'])
+    .subscribe((state: BreakpointState) => {
+      if (state.matches) {
+        this.navDisplay = 'none';
+        this.showingMobileBar = true;
+      } else {
+        this.navDisplay = 'block';
+        this.showingMobileBar = false;
+      }
+    });
+  }
 
   setSelected(selectedValue: string) {
     this.navBars.fill(false);
@@ -27,5 +44,21 @@ throw new Error('Method not implemented.');
     } else if (selectedValue == "jobstatus") {
       this.navBars[3] = true;
     }
+
+    if (this.navDisplay == 'block' && this.showingMobileBar) {
+      this.hideMenu();
+    }
+  }
+
+  setDisplay() {
+    if(this.navDisplay == 'none') {
+      this.navDisplay = 'block';
+    } else {
+      this.navDisplay = 'none';
+    }
+  }
+
+  hideMenu() {
+    this.navDisplay = 'none';
   }
 }
