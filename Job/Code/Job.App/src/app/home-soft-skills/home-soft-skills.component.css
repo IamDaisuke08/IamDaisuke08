@@ -57,3 +57,9 @@
         height: 13rem;
     }
 }
+
+@media (max-width: 62rem) {
+    .accordion-main {
+        display: block;
+    }
+}

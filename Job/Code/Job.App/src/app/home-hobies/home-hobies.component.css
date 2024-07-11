@@ -132,4 +132,8 @@
     .item-comment {
         display: none;
     }
+
+    .accordion-main {
+        display: block;
+    }
 }

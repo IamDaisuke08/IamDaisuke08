@@ -81,3 +81,27 @@ h1, h2, h3, h4, h5, h6, ul, p {
     border-color: var(--btn-brdr);
 
 }
+
+.accordion-main {
+    margin-top: 2rem;
+    display: none;
+}
+
+.accordion-content {
+    text-align: center; 
+    margin: auto;
+}
+
+.accordion-content > p {
+    padding-block: 1rem;
+}
+
+.authors-note {
+    display: none;
+}
+
+@media (max-width: 62rem) {
+    .authors-note {
+        display: block;
+    }
+}

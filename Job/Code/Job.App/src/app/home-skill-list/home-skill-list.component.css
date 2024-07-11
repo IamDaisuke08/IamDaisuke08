@@ -9,3 +9,9 @@
     gap: 4rem;
     justify-content: center;
 }
+
+@media (max-width: 62rem) {
+    .accordion-main {
+        display: block;
+    }
+}
