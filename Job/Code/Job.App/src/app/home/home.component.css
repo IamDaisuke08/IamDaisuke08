@@ -12,3 +12,8 @@
 .disclaimer {
     font-style: italic;
 }
+
+.authors-note p{
+    text-align: center; 
+    margin-top: 1rem;
+}

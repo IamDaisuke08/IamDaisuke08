@@ -1,0 +1,19 @@
+.contact-content {
+    margin-inline: auto;
+    width: min(70svw, 50rem);
+    text-align: center;
+}
+
+.contact-content p {
+    margin-block: 2rem;
+}
+
+.form-fields {
+    margin-block: 1rem;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.btn-theme {
+    width: 10rem;
+}
