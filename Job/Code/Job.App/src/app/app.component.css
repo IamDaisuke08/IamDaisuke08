@@ -75,7 +75,7 @@
         position: fixed;
         background-color: var(--theme-mobile-menu-bg);
         inset: 0 0 0 50%;
-        padding: min(30vh, 5rem) 2rem;
+        padding: min(30vh, 4rem) 2rem;
         gap: 1rem;
     }
 

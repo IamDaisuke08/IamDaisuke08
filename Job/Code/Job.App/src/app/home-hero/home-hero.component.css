@@ -15,3 +15,25 @@
 .hero > * {
     margin-block: 2rem;
 }
+
+.hero-title {
+    margin-bottom: 0rem!important;
+    font-weight: bold;
+}
+
+.hero-sub-title {
+    font-style: italic; 
+    margin-top: 0rem!important;
+    padding-left: 5rem;
+}
+
+@media (max-width: 62rem) {
+    .hero {
+        padding-inline: 1;
+        text-align: left;
+    }
+
+    .hero-sub-title {
+        padding-left: 4rem;
+    }
+}
