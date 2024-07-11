@@ -9,3 +9,6 @@
     background-color: var(--footer-bg-color);
 }
 
+.disclaimer {
+    font-style: italic;
+}

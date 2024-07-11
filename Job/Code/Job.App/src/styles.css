@@ -11,12 +11,19 @@ body {
     --blue-drk : #246AAD;
     --blue-drkr : #053664;
     --light-grey : #d3d3d3;
+    --purple: #6e4197;
+    --green: #4b9429;
+    --blue-grey : #27415a;
+    --red: #a04343;
+    --pink: #faa3e7;
     --transparent-blue: #539ed7f1;
 
     --theme-bg-color: var(--white-txt);
     --theme-btn-bg-color: var(--blue-light);
     --theme-btn-bg-color-drk: var(--blue-drk);
     --theme-mobile-menu-bg : var(--transparent-blue);
+    --theme-txt: var(--white-txt);
+    --theme-txt-alt: var(--blue-drk);
 
     --header-bg-color: var(--blue-drk);
     --header-sub-bg-color: var(--blue-light);

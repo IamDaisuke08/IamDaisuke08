@@ -15,6 +15,7 @@
     padding: 1rem;
     border-radius: .5rem;
     min-height: 10rem;
+    display: flex;
 }
 
 .hobby-item > img {
@@ -24,50 +25,49 @@
 }
 
 .item-1 {
+    color: var(--theme-txt);
+    background-color: var(--purple);
     grid-column: 1 / 3;
-    /* background-image: url("../../../public/rurouni-kenshin.jpg");
-    background-repeat: no-repeat;
-    background-size: cover; */
+}
+
+.item-1 * .item-comment {
+    padding: 3rem;
 }
 
 .item-2 {
     grid-column: 3 / 4; 
     grid-row: 1 / 3;
-    /* background-image: url("../../../public/yuyu-hakusho.jpg");
-    background-repeat: no-repeat;
-    background-size:contain; */
+    background-color: var(--red);
 }
 
 .item-3 {
-    /* background-image: url("../../../public/gundam-wing.jpg"); */
-    background-repeat: no-repeat;
-    background-size:contain;
-}
-
-.item-4 {
-    /* background-image: url("../../../public/trigun.jpg"); */
-    background-repeat: no-repeat;
-    background-size:contain;
+    background-color: var(--light-grey);
 }
 
 .item-5 {
-    /* background-image: url("../../../public/evangelion.jpg"); */
-    background-repeat: no-repeat;
-    background-size:contain;
+    background-color: var(--blue-grey);
 }
 
 .item-6 {
     grid-column: 2 / 4;
-    /* background-image: url("../../../public/jujutsu.jpg"); */
-    background-repeat: no-repeat;
-    background-size:contain;
+    background-color: var(--pink);
 }
 
 .item-7 {
     grid-column: 1 / 4;
-    /* background-image: url("../../../public/one-piece.jpg"); */
-    background-repeat: no-repeat;
-    background-size:contain;
+    background-color: var(--blue-drkr);
+}
+
+.english-title {
+    font-weight: bold;
+}
+
+.japanese-title {
+    color: var(--theme-txt-alt);
+}
+
+.item-comment {
+    font-size: small;
 }
 
 @media (max-width: 62rem) {
