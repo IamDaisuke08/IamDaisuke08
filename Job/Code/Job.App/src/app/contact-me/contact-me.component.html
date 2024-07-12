@@ -5,23 +5,23 @@
     </p>
     <form class="form-group">
       <div class="form-floating form-fields">
-          <input id="yourname" name="yourname" type="text" class="form-control" placeholder="Name">
+          <input id="yourname" name="yourname" type="text" class="form-control" placeholder="Name" [(ngModel)]="message.name">
           <label for="yourname">your name or alias</label>
       </div>
       <div class="form-floating form-fields">
-        <input id="email" name="email" type="text" class="form-control" placeholder="Email">
+        <input id="email" name="email" type="text" class="form-control" placeholder="Email" [(ngModel)]="message.emailaddress">
         <label for="email">your email address</label>
       </div>
       <div class="form-floating form-fields">
-        <input id="mobile" name="mobile" type="text" class="form-control" placeholder="Mobile">
+        <input id="mobile" name="mobile" type="text" class="form-control" placeholder="Mobile" [(ngModel)]="message.mobilenumber">
         <label for="mobile">your mobile number</label>
       </div>
       <div class="form-floating form-fields">
-        <textarea id="details" name="details" type="text" class="form-control" placeholder="Details"></textarea>
+        <textarea id="details" name="details" type="text" class="form-control" placeholder="Details" [(ngModel)]="message.message"></textarea>
         <label for="details">your message goes here...</label>
       </div>
       <div class="form-floating form-fields">
-        <button type="button" class="btn btn-theme">Send</button>
+        <button type="button" class="btn btn-theme" (click)="$event.preventDefault(); sendMessage()">Send</button>
       </div>
     </form>
   </div>
