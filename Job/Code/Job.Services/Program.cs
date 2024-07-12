@@ -1,3 +1,4 @@
+using Job.Services.MailingService;
 using Job.Services.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,8 @@ builder.Services.AddCors(options =>
             policy.AllowAnyHeader();
         });
 });
+
+builder.Services.AddTransient<IMailingService, EmailService>();
 
 // Add services to the container.
 builder.Services.AddControllers();
