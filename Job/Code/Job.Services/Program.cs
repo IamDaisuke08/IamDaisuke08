@@ -2,14 +2,12 @@ using Job.Services.MailingService;
 using Job.Services.Models;
 using Microsoft.EntityFrameworkCore;
 
-var AllowAll = "AllowAllOrigins";
-
 var builder = WebApplication.CreateBuilder(args);
 
 // build for CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: AllowAll,
+    options.AddDefaultPolicy(
         policy =>
         {
             policy.AllowAnyOrigin();
@@ -29,14 +27,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-app.UseCors(AllowAll);
+app.UseDefaultFiles();
+app.UseStaticFiles();
+app.UseCors();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
-//}
+}
 
 app.UseAuthorization();
 

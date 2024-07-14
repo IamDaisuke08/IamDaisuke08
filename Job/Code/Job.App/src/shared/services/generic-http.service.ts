@@ -15,6 +15,7 @@ export class GenericHttpService<T extends GenericItem> extends CustomHttpHandler
   constructor(private client : HttpClient) 
   { 
     super();
+    this.api_env = this.baseUrl;
   }
 
   private getStandarOptions() : any {
@@ -33,7 +34,7 @@ export class GenericHttpService<T extends GenericItem> extends CustomHttpHandler
 
   get(path : string) {
     let options = this.getStandarOptions();
-    return this.client.get(this.getCompletePath(path), options).pipe(catchError(this.handleError));
+    return this.client.get(this.getCompletePath(path), { headers: options.headers }).pipe(catchError(this.handleError));
   }
 
   getById(path : string, id : number) {
