@@ -1,4 +1,4 @@
-import { GenericItem } from "./genericItem";
+import { GenericItem } from "@models/genericItem";
 
 export class MessageDto implements GenericItem {
     id: number = 0;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HomeSkillItemComponent } from '../home-skill-item/home-skill-item.component';
+import { HomeSkillItemComponent } from '@app/home-skill-item/home-skill-item.component';
 
 @Component({
   selector: 'home-skill-list',

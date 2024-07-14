@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
-import { GenericItem } from "../shared/models/genericItem";
-import { GenericHttpService } from "../shared/services/generic-http.service";
+import { GenericItem } from "@models/genericItem";
+import { GenericHttpService } from "@services/generic-http.service";
 
 @Component({
     template: ''

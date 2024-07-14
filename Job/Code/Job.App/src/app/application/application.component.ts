@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationItem } from '../../shared/models/applicationItem';
-import { GenericHttpService } from '../../shared/services/generic-http.service';
-import { ApplicationListComponent } from '../application-list/application-list.component';
+import { ApplicationItem } from '@models/applicationItem';
+import { GenericHttpService } from '@services/generic-http.service';
+import { ApplicationListComponent } from '@app/application-list/application-list.component';
 import { Router } from '@angular/router';
-import { FilterComponent } from '../filter/filter.component';
-import { LocationItem } from '../../shared/models/locationItem';
-import { JobStatusItem } from '../../shared/models/jobStatusItem';
+import { FilterComponent } from '@app/filter/filter.component';
+import { LocationItem } from '@models/locationItem';
+import { JobStatusItem } from '@models/jobStatusItem';
 import { CommonModule } from '@angular/common';
-import { ApplicationBoxesComponent } from '../application-boxes/application-boxes.component';
+import { ApplicationBoxesComponent } from '@app/application-boxes/application-boxes.component';
 
 @Component({
   selector: 'application',

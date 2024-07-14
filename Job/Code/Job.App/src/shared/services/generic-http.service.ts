@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CustomHttpHandlers } from './customHtttpHandler';
+import { CustomHttpHandlers } from '@services/customHtttpHandler';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs';
-import { GenericItem } from '../models/genericItem';
-import { environment } from '../../environments/environment'
+import { GenericItem } from '@models/genericItem';
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root'

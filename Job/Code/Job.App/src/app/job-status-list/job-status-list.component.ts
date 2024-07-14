@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { JobstatusService } from '../../shared/services/jobstatus.service';
-import { JobStatusItem } from '../../shared/models/jobStatusItem';
+import { Component, OnInit } from '@angular/core';
+import { JobStatusItem } from '@models/jobStatusItem';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GenericHttpService } from '../../shared/services/generic-http.service';
-import { GenericCrud } from '../generic-crud';
+import { GenericHttpService } from '@services/generic-http.service';
+import { GenericCrud } from '@app/generic-crud';
 
 @Component({
   selector: 'job-status-list',

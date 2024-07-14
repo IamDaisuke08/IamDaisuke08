@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationItem } from '../../shared/models/locationItem';
-import { GenericHttpService } from '../../shared/services/generic-http.service';
-import { LocationListComponent } from '../location-list/location-list.component';
+import { LocationItem } from '@models/locationItem';
+import { GenericHttpService } from '@services/generic-http.service';
+import { LocationListComponent } from '@app/location-list/location-list.component';
 
 @Component({
   selector: 'location',

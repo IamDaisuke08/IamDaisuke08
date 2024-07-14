@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { GenericHttpService } from '../../shared/services/generic-http.service';
-import { LocationItem } from '../../shared/models/locationItem';
-import { GenericCrud } from '../generic-crud';
+import { GenericHttpService } from '@services/generic-http.service';
+import { LocationItem } from '@models/locationItem';
+import { GenericCrud } from '@app/generic-crud';
 
 @Component({
   selector: 'location-list',

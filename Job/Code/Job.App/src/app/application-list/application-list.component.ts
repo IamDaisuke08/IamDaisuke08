@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { GenericCrud } from '../generic-crud';
-import { ApplicationItem } from '../../shared/models/applicationItem';
-import { GenericHttpService } from '../../shared/services/generic-http.service';
-import { LocationItem } from '../../shared/models/locationItem';
-import { JobStatusItem } from '../../shared/models/jobStatusItem';
+import { GenericCrud } from '@app/generic-crud';
+import { ApplicationItem } from '@models/applicationItem';
+import { GenericHttpService } from '@services/generic-http.service';
+import { LocationItem } from '@models/locationItem';
+import { JobStatusItem } from '@models/jobStatusItem';
 import { Router } from '@angular/router';
 
 @Component({

@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GenericCrud } from '../generic-crud';
-import { ApplicationItem } from '../../shared/models/applicationItem';
-import { LocationItem } from '../../shared/models/locationItem';
-import { JobStatusItem } from '../../shared/models/jobStatusItem';
-import { GenericHttpService } from '../../shared/services/generic-http.service';
+import { GenericCrud } from '@app/generic-crud';
+import { ApplicationItem } from '@models/applicationItem';
+import { LocationItem } from '@models/locationItem';
+import { JobStatusItem } from '@models/jobStatusItem';
+import { GenericHttpService } from '@services/generic-http.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ApplicationBoxComponent } from '../application-box/application-box.component';
+import { ApplicationBoxComponent } from '@app/application-box/application-box.component';
 
 @Component({
   selector: 'application-boxes',

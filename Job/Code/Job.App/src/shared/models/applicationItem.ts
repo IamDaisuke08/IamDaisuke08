@@ -1,4 +1,4 @@
-import { GenericItem } from "./genericItem";
+import { GenericItem } from "@models/genericItem";
 
 export class ApplicationItem implements GenericItem {
     

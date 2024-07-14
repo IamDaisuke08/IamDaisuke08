@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { JobStatusListComponent } from '../job-status-list/job-status-list.component';
-import { JobstatusService } from '../../shared/services/jobstatus.service';
-import { JobStatusItem } from '../../shared/models/jobStatusItem';
-import { GenericHttpService } from '../../shared/services/generic-http.service';
+import { JobStatusListComponent } from '@app/job-status-list/job-status-list.component';
+import { JobStatusItem } from '@models/jobStatusItem';
+import { GenericHttpService } from '@services/generic-http.service';
 
 @Component({
   selector: 'job-status',

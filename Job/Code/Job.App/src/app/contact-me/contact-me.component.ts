@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MessageItem } from '../../shared/models/messageItem';
-import { GenericCrud } from '../generic-crud';
-import { MessageDto } from '../../shared/models/messageDto';
+import { MessageItem } from '@models/messageItem';
+import { GenericCrud } from '@app/generic-crud';
+import { MessageDto } from '@models/messageDto';
 
 @Component({
   selector: 'contact-me',

@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ApplicationItem } from '../../shared/models/applicationItem';
-import { JobStatusItem } from '../../shared/models/jobStatusItem';
+import { ApplicationItem } from '@models/applicationItem';
+import { JobStatusItem } from '@models/jobStatusItem';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ToolTipDirective } from '../tooltip';
-import { LocationItem } from '../../shared/models/locationItem';
+import { ToolTipDirective } from '@app/tooltip';
+import { LocationItem } from '@models/locationItem';
 
 @Component({
   selector: 'application-box',
