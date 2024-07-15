@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { CustomHttpHandlers } from '@services/customHtttpHandler';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs';
@@ -10,12 +10,11 @@ import { environment } from '@env/environment';
 })
 export class GenericHttpService<T extends GenericItem> extends CustomHttpHandlers {
 
-  private baseUrl : string = `${ environment.API_URL }api/`; //"http://localhost:5202/api/";
-
+  readonly baseUrl : string = `${ environment.API_URL }api/`; //"http://localhost:5202/api/";
+ 
   constructor(private client : HttpClient) 
   { 
     super();
-    this.api_env = this.baseUrl;
   }
 
   private getStandarOptions() : any {

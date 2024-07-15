@@ -6,17 +6,12 @@ import { throwError } from 'rxjs';
     providedIn: 'root'
   })
 export class CustomHttpHandlers {
-    api_env : string = '';
-    constructor() { }
 
-    public setEnv(env : string)
-    {
-        this.api_env = env;
+    constructor() { 
     }
 
     public handleError(error : HttpErrorResponse) {
-        let errMessage = `ERROR for Env ${ this.api_env }`;
-        console.log(errMessage, error.error);
+        console.log('ERROR: ', error.error);
         return throwError(() => new Error('An error occured while connecting to the server. Please try again.', error.error));
     }
 }
