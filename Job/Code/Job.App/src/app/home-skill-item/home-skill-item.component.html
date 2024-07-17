@@ -1,23 +1,31 @@
 <div class="box-skill">
     <div>
-        <img class="skill-icon" [src]="imageName">
+        <img class="skill-icon" [ngSrc]="imageName" height="1" width="1">
     </div>
     <div class="skill-box-desc">
         <h5>{{ skillName }}</h5>
-        <div *ngIf="this.proficiencyValue.length !== 0" class="skill-desc">
+        @if (proficiencyValue.length !== 0) {
+        <div class="skill-desc">
             <label class="skill-text">Proficiency:</label>
             <label class="skill-value">{{ proficiencyValue }}</label>
         </div>
-        <div *ngIf="this.experienceValue.length !== 0" class="skill-desc">
+        }
+        @if (experienceValue.length !== 0) {
+        <div class="skill-desc">
             <label class="skill-text">Experience:</label>
             <label class="skill-value">{{ experienceValue }}</label>
         </div>
-        <div *ngIf="this.gotoValue.length !== 0" class="skill-desc">
+        }
+        @if (gotoValue.length !== 0) {
+        <div class="skill-desc">
             <label class="skill-text">Go-to:</label>
             <label class="skill-value">{{ gotoValue }}</label>
         </div>
-        <div *ngIf="this.longDesc" class="skill-desc long-desc">
+        }
+        @if (longDesc.length !== 0) {
+        <div class="skill-desc long-desc">
             <p>{{ this.longDesc }}</p>
         </div>
+        }
     </div>
 </div>

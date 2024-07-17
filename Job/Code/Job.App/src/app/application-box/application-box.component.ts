@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ToolTipDirective } from '@app/tooltip';
 import { LocationItem } from '@models/locationItem';
 
+
 @Component({
   selector: 'application-box',
   standalone: true,

@@ -62,4 +62,9 @@
     .accordion-main {
         display: block;
     }
+
+    .layout-preview {
+        height: 80%;
+        width: 80%;
+    }
 }

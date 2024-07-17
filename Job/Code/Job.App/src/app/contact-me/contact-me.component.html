@@ -3,25 +3,71 @@
         If you like what you saw, leave a message!<br>
         You can also leave a message just for fun you know! haha!
     </p>
-    <form class="form-group">
+    <form class="form-group" [formGroup]="contactForm" (ngSubmit)="sendMessage()">
       <div class="form-floating form-fields">
-          <input id="yourname" name="yourname" type="text" class="form-control" placeholder="Name" [(ngModel)]="message.name">
+          <input id="yourname" name="yourname" type="text" class="form-control" placeholder="Name" formControlName="name">
           <label for="yourname">your name or alias</label>
+          @if (name?.invalid && name?.dirty) {
+          <div class="alert alert-danger">
+            @if (name?.hasError('required')) {
+            <div>
+              please enter your name
+            </div>
+            }
+          </div>
+          }
       </div>
       <div class="form-floating form-fields">
-        <input id="email" name="email" type="text" class="form-control" placeholder="Email" [(ngModel)]="message.emailaddress">
+        <input id="email" name="email" type="text" class="form-control" placeholder="Email" formControlName="email">
         <label for="email">your email address</label>
+        @if (email?.invalid && email?.dirty) {
+        <div class="alert alert-danger">
+          @if (email?.hasError('required')) {
+          <div>
+            please enter you email address so we can contact you
+          </div>
+          }
+          @if (email?.hasError('email')) {
+          <div>
+            the email address you provided is invalid
+          </div>
+          }
+        </div>
+        }
       </div>
       <div class="form-floating form-fields">
-        <input id="mobile" name="mobile" type="text" class="form-control" placeholder="Mobile" [(ngModel)]="message.mobilenumber">
+        <input id="mobile" name="mobile" type="text" class="form-control" placeholder="Mobile" formControlName="mobile">
         <label for="mobile">your mobile number</label>
+        @if (mobile?.invalid && mobile?.dirty) {
+          <div class="alert alert-danger">
+            @if (mobile?.hasError('maxlength')) {
+            <div>
+              maximum length for mobile phone has been reached
+            </div>
+            }
+            @if (mobile?.hasError('pattern')) {
+            <div>
+              the mobile phone number you provided is invalid
+            </div>
+            }
+          </div>
+          }
       </div>
       <div class="form-floating form-fields">
-        <textarea id="details" name="details" type="text" class="form-control" placeholder="Details" [(ngModel)]="message.message"></textarea>
+        <textarea id="details" name="details" type="text" class="form-control" placeholder="Details" formControlName="message"></textarea>
         <label for="details">your message goes here...</label>
+        @if (messageTxt?.invalid && messageTxt?.dirty) {
+          <div class="alert alert-danger">
+            @if (messageTxt?.hasError('maxlength')) {
+            <div>
+              maximum length for message has been reached
+            </div>
+            }
+          </div>
+          }
       </div>
       <div class="form-floating form-fields">
-        <button type="button" class="btn btn-theme" (click)="$event.preventDefault(); sendMessage()">Send</button>
+        <button type="submit" class="btn btn-theme" [disabled]="!contactForm.valid">Send</button>
       </div>
     </form>
   </div>

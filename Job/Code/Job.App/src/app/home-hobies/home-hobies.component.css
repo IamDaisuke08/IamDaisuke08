@@ -18,7 +18,7 @@
     display: flex;
 }
 
-.hobby-item > img {
+.hobby-item img {
     height: 10rem; 
     width: 8rem; 
     border-radius: .3rem;
@@ -135,5 +135,10 @@
 
     .accordion-main {
         display: block;
+    }
+
+    .layout-preview {
+        height: 80%;
+        width: 80%;
     }
 }
