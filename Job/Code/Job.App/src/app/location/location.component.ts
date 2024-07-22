@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { LocationItem } from '@models/locationItem';
 import { GenericHttpService } from '@services/generic-http.service';
 import { LocationListComponent } from '@app/location-list/location-list.component';
+import { LocationMapListComponent } from '@app/location-map-list/location-map-list.component';
 
 @Component({
   selector: 'location',
   standalone: true,
-  imports: [LocationListComponent],
+  imports: [LocationListComponent, LocationMapListComponent],
   templateUrl: './location.component.html',
   styleUrl: './location.component.css'
 })

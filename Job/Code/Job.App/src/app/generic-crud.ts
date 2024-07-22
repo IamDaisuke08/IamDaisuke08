@@ -35,16 +35,18 @@ export class GenericCrud<T extends GenericItem> {
       }
     
       onDelete(path : string, item: T) {
-        this.service.delete(path, item.id).subscribe(() => {
-          console.log(`deleted jobstatus ${item.id}`);
-        },
-        (error : any) => {
-          console.log(error.message);
-        },
-        () => {
-          let index = this.collection.indexOf(item);
-          this.collection.splice(index, 1);
-        });
+        if (confirm('Are you sure you want to delete this item?')) {
+          this.service.delete(path, item.id).subscribe(() => {
+            console.log(`deleted jobstatus ${item.id}`);
+          },
+          (error : any) => {
+            console.log(error.message);
+          },
+          () => {
+            let index = this.collection.indexOf(item);
+            this.collection.splice(index, 1);
+          });
+        }
       }
     
       private update(path : string, item: T) {

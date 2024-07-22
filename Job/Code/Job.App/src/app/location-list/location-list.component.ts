@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GenericHttpService } from '@services/generic-http.service';
 import { LocationItem } from '@models/locationItem';
@@ -12,14 +12,11 @@ import { GenericCrud } from '@app/generic-crud';
   templateUrl: './location-list.component.html',
   styleUrl: './location-list.component.css'
 })
-export class LocationListComponent extends GenericCrud<LocationItem> implements OnInit {
+export class LocationListComponent extends GenericCrud<LocationItem> {
 
   path = "Locations";
 
   constructor(override service : GenericHttpService<LocationItem>) {
     super(service);
-  }
-
-  ngOnInit(): void {
   }
 }

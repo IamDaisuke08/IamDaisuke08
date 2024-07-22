@@ -113,7 +113,10 @@ namespace Job.Services.Controllers
             {
                 Id = location.Id,
                 Name = location.Name,
-                CreatedDate = location.CreatedDate
+                CreatedDate = location.CreatedDate,
+                Lng = location.Lng,
+                Lat = location.Lat,
+                Zoom = location.Zoom
             };
         }
 
@@ -123,7 +126,10 @@ namespace Job.Services.Controllers
             {
                 Id = location.Id,
                 Name = location.Name,
-                CreatedDate = location.CreatedDate
+                CreatedDate = location.CreatedDate,
+                Lng = location.Lng,
+                Lat = location.Lat,
+                Zoom = location.Zoom
             };
         }
     }

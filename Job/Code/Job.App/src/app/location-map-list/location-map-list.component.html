@@ -1,0 +1,57 @@
+@if (collection.length == 0) {
+    <div class="container mt-5 d-flex justify-content-center align-items-center align-self-center">
+        <h3 class="content-header">No Locations to show at the moment. Consider adding one via AddNew button. :P</h3>
+    </div>
+}
+@else {
+    <div class="loc-holder">
+        <div class="loc-list">
+        @for(loc of collection; track loc.id) {
+            <div class="loc-item" [attr.item-selected]="loc.selected" (click)="setSelected(loc.id)">
+                @if (!loc.onEditMode) {
+                <div class="loc-header">
+                    <h3>{{ loc.name }}</h3>
+                    <i class="fa fa-pencil-square-o p-1 edit-button" aria-hidden="true" style="cursor: pointer;" (click)="onEdit(loc)" alt="Edit Location"></i>
+                    <i class="fa fa-trash-o p-1 edit-button" aria-hidden="true" style="cursor: pointer;" (click)="onDelete(path, loc)" alt="Delete Location"></i>
+                </div>
+                <div class="loc-detail">
+                    <p>Longitude: {{ loc.lng }}</p>
+                    <p>Latitude: {{ loc.lat }}</p>
+                    <p>Zoom: {{ loc.zoom }}</p>
+                </div>
+                }
+                @else {
+                    <div class="form-floating form-fields">
+                        <input id="locname" name="locname" type="text" class="form-control" placeholder="Name" [(ngModel)]="loc.name">
+                        <label for="locname">Location Name</label>
+                    </div>
+                    <div class="loc-detail form-loc-detail">
+                        <div class="form-floating form-fields">
+                            <input id="longitude" name="longitude" type="text" class="form-control" placeholder="Longitude" [(ngModel)]="loc.lng">
+                            <label for="longitude">Longitude</label>
+                        </div>
+                        <div class="form-floating form-fields">
+                            <input id="latitude" name="latitude" type="text" class="form-control" placeholder="Latitude" [(ngModel)]="loc.lat">
+                            <label for="latitude">Latitude</label>
+                        </div>
+                        <div class="form-floating form-fields">
+                            <input id="zoom" name="zoom" type="text" class="form-control" placeholder="Zoom" [(ngModel)]="loc.zoom">
+                            <label for="zoom">Zoom</label>
+                        </div>
+                    </div>
+                    <div class="loc-buttons">
+                        <button type="button" class="btn btn-theme my-2" (click)="onSave(path, loc)">Save</button>
+                        <button type="button" class="btn btn-theme my-2" (click)="onCancelEdit(loc)">Cancel</button>
+                    </div>
+                }
+            </div>
+        }
+        </div>
+        <div class="map-holder">
+            @if (showMap) {
+            <location-map [(locItem)]="selectedItem" [editing]="selectedItem.onEditMode"></location-map>
+            }
+            <button type="button" class="btn btn-theme add-new-btn" (click)="addNew()">Add New</button>
+        </div>
+    </div>
+}
