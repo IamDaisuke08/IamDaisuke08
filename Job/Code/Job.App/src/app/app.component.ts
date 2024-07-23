@@ -31,6 +31,14 @@ export class AppComponent implements OnInit {
         this.showingMobileBar = false;
       }
     });
+
+    // var testToken = localStorage.getItem('loginToken');
+    // if (testToken === null){
+    //   this.authService.LogIn('daisuke', 'password');
+    // }
+    // else {
+    //   console.log('token available')
+    // }
   }
 
   setSelected(selectedValue: string) {

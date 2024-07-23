@@ -12,6 +12,7 @@ public partial class AppDbContext : DbContext
     {
     }
 
+    public virtual DbSet<AppUser> AppUsers { get; set; }
     public virtual DbSet<JobApplication> JobApplications { get; set; }
 
     public virtual DbSet<JobStatus> JobStatuses { get; set; }
@@ -22,6 +23,20 @@ public partial class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AppUser>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Location");
+
+            entity.ToTable("AppUser");
+
+            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.Password).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getutcdate())")
+                .HasColumnType("datetime");
+        });
+
         modelBuilder.Entity<JobApplication>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__JobApplication");
@@ -72,18 +87,20 @@ public partial class AppDbContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Message>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Messages");
+        //modelBuilder.Entity<Message>(entity =>
+        //{
+        //    entity.HasKey(e => e.Id).HasName("PK__Messages");
 
-            entity.HasIndex(e => new { e.CountryCode, e.StartDate }, "PK__Messages_CountryCode_StartDate").IsUnique();
+        //    entity.ToTable("Message");
 
-            entity.Property(e => e.CountryCode).HasMaxLength(3);
-            entity.Property(e => e.EndDate).HasColumnType("datetime");
-            entity.Property(e => e.Message1).HasColumnName("Message");
-            entity.Property(e => e.StartDate).HasColumnType("datetime");
-            entity.Property(e => e.Title).HasMaxLength(100);
-        });
+        //    entity.HasIndex(e => new { e.CountryCode, e.StartDate }, "PK__Messages_CountryCode_StartDate").IsUnique();
+
+        //    entity.Property(e => e.CountryCode).HasMaxLength(3);
+        //    entity.Property(e => e.EndDate).HasColumnType("datetime");
+        //    entity.Property(e => e.Message1).HasColumnName("Message");
+        //    entity.Property(e => e.StartDate).HasColumnType("datetime");
+        //    entity.Property(e => e.Title).HasMaxLength(100);
+        //});
 
         OnModelCreatingPartial(modelBuilder);
     }

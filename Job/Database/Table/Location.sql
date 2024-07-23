@@ -1,10 +1,9 @@
-CREATE TABLE [dbo].[Location]
+CREATE TABLE [dbo].[AppUser]
 (
 	[Id]			BIGINT IDENTITY(1,1) NOT NULL,
 	[Name]			VARCHAR(100) NOT NULL,
-	[Lng]			FLOAT NULL,
-	[Lat]			FLOAT NULL,
-	[Zoom]			INT NULL,
+	[Email]			FLOAT NULL,
+	[Password]			FLOAT NULL,
 	[CreatedDate]	DATETIME NOT NULL CONSTRAINT DF_Location_CreatedDate DEFAULT(GETUTCDATE())
 
 	CONSTRAINT [PK__Location] PRIMARY KEY CLUSTERED

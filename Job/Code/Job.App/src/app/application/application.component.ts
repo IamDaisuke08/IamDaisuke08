@@ -53,7 +53,7 @@ export class ApplicationComponent implements AfterViewInit {
       },
       error: (error : any) => { 
         this.mainCollection = this.dummy.getApplications();
-        console.log(error.message); 
+        console.log(error); 
       }
     });
   }

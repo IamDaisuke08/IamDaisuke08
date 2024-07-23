@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Job.Services.Models;
 using Job.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Job.Services.Controllers
 {
