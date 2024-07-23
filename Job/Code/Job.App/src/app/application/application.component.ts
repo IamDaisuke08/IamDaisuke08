@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { ApplicationItem } from '@models/applicationItem';
 import { GenericHttpService } from '@services/generic-http.service';
 import { ApplicationListComponent } from '@app/application-list/application-list.component';
@@ -8,6 +8,8 @@ import { LocationItem } from '@models/locationItem';
 import { JobStatusItem } from '@models/jobStatusItem';
 import { CommonModule } from '@angular/common';
 import { ApplicationBoxesComponent } from '@app/application-boxes/application-boxes.component';
+import { DummyService } from '@services/dummy-service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'application',
@@ -16,7 +18,7 @@ import { ApplicationBoxesComponent } from '@app/application-boxes/application-bo
   templateUrl: './application.component.html',
   styleUrl: './application.component.css'
 })
-export class ApplicationComponent implements OnInit {
+export class ApplicationComponent implements AfterViewInit {
 
   path = "JobApplications";
   mainCollection : ApplicationItem[] = [];
@@ -26,50 +28,78 @@ export class ApplicationComponent implements OnInit {
   filterCompany: any;
   filterLoc: any;
   filterStat: any;
+  loaded = false;
 
-  constructor(private service : GenericHttpService<ApplicationItem>, private router : Router) { 
+  constructor(
+    private service : GenericHttpService<ApplicationItem>, 
+    private router : Router,
+    private dummy : DummyService) { 
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.loadStatus();
-    this.loadLocations();
-    this.load();
   }
 
   private load()
   {
-    this.service.get(this.path).subscribe((collection : any) => {
-      console.log('job applications loaded');
-      this.mainCollection = collection;
-    },
-    (error : any) => {
-      alert(error.message);
+    const jobGetter = this.service.get(this.path);
+    jobGetter.pipe(
+      finalize(() => this.loaded = true)
+    )
+    .subscribe({
+      next: (collection : any) => {
+        console.log('job applications loaded');
+        this.mainCollection = collection;
+      },
+      error: (error : any) => { 
+        this.mainCollection = this.dummy.getApplications();
+        console.log(error.message); 
+      }
     });
   }
 
-  loadStatus() {
-    this.service.get("JobStatus").subscribe((statusCollection : any) => {
-      this.status = statusCollection;
-      this.status.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-    },
-    (error : any) => {
-      console.log(error.message);
-    },
-    () => {
-      console.log("status loaded.")
-    });
+  private loadStatus() {
+    const statGetter = this.service.get('JobStatus');
+    statGetter.pipe(
+      finalize(() => {
+        this.status.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+        this.loadLocations();
+      })
+    )
+    .subscribe(
+      {
+        next: (statusCollection : any) => {
+            this.status = statusCollection;
+          },
+        error: (error : any) => { 
+          this.status = this.dummy.getStatus();
+          console.log(error.message); 
+        },
+        complete: () => { 
+          console.log('status load complete'); 
+          }
+      });
   }
 
-  loadLocations() {
-    this.service.get("Locations").subscribe((locCollection : any) => {
-      this.locations = locCollection;
-      this.locations.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-    },        
-    (error : any) => {
-      console.log(error.message);
-    },
-    () => {
-      console.log("locations loaded.")
+  private loadLocations() {
+    const locGetter = this.service.get('Locations');
+    locGetter.pipe(
+      finalize(() => {
+        this.locations.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+        this.load();
+      })
+    )
+    .subscribe({
+      next: (locCollection : any) => {
+          this.locations = locCollection;
+        },        
+      error: (error : any) => { 
+        console.log(error.message);
+        this.locations = this.dummy.getLocations();
+      },
+      complete: () => {
+          console.log("locations loaded.");
+        }
     });
   }
 

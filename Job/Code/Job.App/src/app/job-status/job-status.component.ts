@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { JobStatusListComponent } from '@app/job-status-list/job-status-list.component';
 import { JobStatusItem } from '@models/jobStatusItem';
+import { DummyService } from '@services/dummy-service';
 import { GenericHttpService } from '@services/generic-http.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'job-status',
@@ -10,27 +12,33 @@ import { GenericHttpService } from '@services/generic-http.service';
   templateUrl: './job-status.component.html',
   styleUrl: './job-status.component.css'
 })
-export class JobStatusComponent implements OnInit {
+export class JobStatusComponent implements AfterViewInit {
 
   path = "JobStatus";
-
+  loaded = false;
   mainCollection : JobStatusItem[] = [];
 
-  constructor(private service : GenericHttpService<JobStatusItem>) { 
+  constructor(private service : GenericHttpService<JobStatusItem>, private dummy : DummyService) { 
   }
-
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.load();
   }
   
   private load()
   {
-    this.service.get(this.path).subscribe((collection : any) => {
-      console.log('status loaded');
-      this.mainCollection = collection;
-    },
-    (error : any) => {
-      alert(error.message);
+    const statGetter = this.service.get(this.path);
+    statGetter.pipe(
+      finalize(() => this.loaded = true)
+    )
+    .subscribe({
+      next: (collection : any) => {
+        console.log('status loaded');
+        this.mainCollection = collection;
+      },
+      error: (error : any) => {
+        this.mainCollection = this.dummy.getStatus();
+        console.log(error.message);
+      }
     });
   }
 
