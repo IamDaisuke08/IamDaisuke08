@@ -18,6 +18,10 @@ export class JobStatusComponent implements AfterViewInit {
   loaded = false;
   mainCollection : JobStatusItem[] = [];
 
+  get IsLoggedIn() {
+    return sessionStorage.getItem('username') !== null;
+  }
+
   constructor(private service : GenericHttpService<JobStatusItem>, private dummy : DummyService) { 
   }
   ngAfterViewInit(): void {

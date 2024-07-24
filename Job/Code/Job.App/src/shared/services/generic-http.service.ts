@@ -18,7 +18,7 @@ export class GenericHttpService<T extends GenericItem> extends CustomHttpHandler
   }
 
   private getStandarOptions() : any {
-    let token = localStorage.getItem('loginToken');
+    let token = sessionStorage.getItem('loginToken');
     return {
       headers : new HttpHeaders({
         'Access-Control-Allow-Origin': environment.API_URL,

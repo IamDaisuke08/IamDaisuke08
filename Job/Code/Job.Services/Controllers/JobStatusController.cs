@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Job.Services.Models;
 using Job.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Job.Services.Controllers
 {
@@ -22,7 +23,7 @@ namespace Job.Services.Controllers
         }
 
         // GET: api/JobStatus
-        [HttpGet]
+        [Authorize, HttpGet]
         public async Task<ActionResult<IEnumerable<JobStatusDTO>>> GetJobStatuses()
         {
             return await _context.JobStatuses
@@ -31,7 +32,7 @@ namespace Job.Services.Controllers
         }
 
         // GET: api/JobStatus/5
-        [HttpGet("{id}")]
+        [Authorize, HttpGet("{id}")]
         public async Task<ActionResult<JobStatusDTO>> GetJobStatus(long id)
         {
             var jobStatus = await _context.JobStatuses.FindAsync(id);
@@ -46,7 +47,7 @@ namespace Job.Services.Controllers
 
         // PUT: api/JobStatus/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [Authorize, HttpPut("{id}")]
         public async Task<IActionResult> PutJobStatus(long id, JobStatusDTO jobStatus)
         {
             if (id != jobStatus.Id)
@@ -77,7 +78,7 @@ namespace Job.Services.Controllers
 
         // POST: api/JobStatus
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [Authorize, HttpPost]
         public async Task<ActionResult<JobStatusDTO>> PostJobStatus(JobStatusDTO jobStatus)
         {
             var newJobStatus = this.DtoToEntity(jobStatus);
@@ -88,7 +89,7 @@ namespace Job.Services.Controllers
         }
 
         // DELETE: api/JobStatus/5
-        [HttpDelete("{id}")]
+        [Authorize, HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJobStatus(long id)
         {
             var jobStatus = await _context.JobStatuses.FindAsync(id);

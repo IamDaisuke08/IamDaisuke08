@@ -30,6 +30,10 @@ export class ApplicationComponent implements AfterViewInit {
   filterStat: any;
   loaded = false;
 
+  get IsLoggedIn() {
+    return sessionStorage.getItem('username') !== null;
+  }
+
   constructor(
     private service : GenericHttpService<ApplicationItem>, 
     private router : Router,

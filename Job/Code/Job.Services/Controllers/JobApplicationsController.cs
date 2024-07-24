@@ -23,7 +23,7 @@ namespace Job.Services.Controllers
         }
 
         // GET: api/JobApplications
-        [HttpGet]
+        [Authorize, HttpGet]
         public async Task<ActionResult<IEnumerable<JobApplicationDTO>>> GetJobApplications()
         {
             return await _context.JobApplications
@@ -32,7 +32,7 @@ namespace Job.Services.Controllers
         }
 
         // GET: api/JobApplications/5
-        [HttpGet("{id}")]
+        [Authorize, HttpGet("{id}")]
         public async Task<ActionResult<JobApplicationDTO>> GetJobApplication(long id)
         {
             var jobApplication = await _context.JobApplications.FindAsync(id);
@@ -46,7 +46,7 @@ namespace Job.Services.Controllers
 
         // PUT: api/JobApplications/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [Authorize, HttpPut("{id}")]
         public async Task<IActionResult> PutJobApplication(long id, JobApplicationDTO jobApplication)
         {
             if (id != jobApplication.Id)
@@ -77,7 +77,7 @@ namespace Job.Services.Controllers
 
         // POST: api/JobApplications
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [Authorize, HttpPost]
         public async Task<ActionResult<JobApplicationDTO>> PostJobApplication(JobApplicationDTO jobApplication)
         {
             var newJobApplication = this.DtoToEntity(jobApplication);
@@ -88,7 +88,7 @@ namespace Job.Services.Controllers
         }
 
         // DELETE: api/JobApplications/5
-        [HttpDelete("{id}")]
+        [Authorize, HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJobApplication(long id)
         {
             var jobApplication = await _context.JobApplications.FindAsync(id);

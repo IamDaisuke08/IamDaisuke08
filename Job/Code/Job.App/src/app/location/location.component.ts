@@ -19,8 +19,12 @@ export class LocationComponent implements AfterViewInit {
   mainCollection : LocationItem[] = [];
   loaded = false;
 
+  get IsLoggedIn() {
+    return sessionStorage.getItem('username') !== null;
+  }
   constructor(private service : GenericHttpService<LocationItem>, private dummy : DummyService) { 
   }
+  
   ngAfterViewInit(): void {
     this.load();
   }

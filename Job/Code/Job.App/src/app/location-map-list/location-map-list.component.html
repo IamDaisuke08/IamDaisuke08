@@ -51,7 +51,7 @@
             @if (showMap) {
             <location-map [(locItem)]="selectedItem" [editing]="selectedItem === undefined ? false : selectedItem.onEditMode"></location-map>
             }
-            <button type="button" class="btn btn-theme add-new-btn" (click)="addNew()">Add New</button>
+            <button type="button" class="btn btn-theme add-new-btn" (click)="addNew()" [disabled]="!IsLoggedIn">Add New</button>
         </div>
     </div>
 }

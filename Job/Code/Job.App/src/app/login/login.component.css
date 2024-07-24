@@ -1,0 +1,30 @@
+.login-content {
+    display: flex;
+    height: 90svh;
+    width: 50svw;
+    justify-content: center;
+    margin: auto;
+    /* border: 1px solid yellow; */
+}
+
+.login-content form {
+    min-width: 60%;
+    box-shadow: 0 0 1rem grey;
+    padding: 2rem;
+    margin-block: auto;
+    /* border: 1px solid pink; */
+}
+
+.login-content label {
+    margin-bottom: .5rem;
+    color: var(--theme-txt-alt);
+    text-align: left;
+}
+
+.login-content input {
+    margin-bottom: 1rem;
+}
+
+button {
+    width: 100%;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
@@ -16,7 +16,19 @@ export class AppComponent implements OnInit {
   navBars = new Array(4).fill(false);
   showingMobileBar : boolean = false;
 
-  constructor(public breakepoint : BreakpointObserver) {
+  get UserName() {
+    return sessionStorage.getItem('username') ?? 'Anonymous';
+  }
+
+  get Initial() {
+    return sessionStorage.getItem('username')?.substring(0, 1).toUpperCase() ?? '?';
+  }
+
+  get IsLoggedIn() {
+    return sessionStorage.getItem('username') !== null;
+  }
+
+  constructor(public breakepoint : BreakpointObserver, private router : Router) {
   }
 
   ngOnInit(): void {
@@ -31,15 +43,16 @@ export class AppComponent implements OnInit {
         this.showingMobileBar = false;
       }
     });
-
-    // var testToken = localStorage.getItem('loginToken');
-    // if (testToken === null){
-    //   this.authService.LogIn('daisuke', 'password');
-    // }
-    // else {
-    //   console.log('token available')
-    // }
   }
+
+  logout() {
+    sessionStorage.clear();
+    this.hideMenu();
+  }
+
+  // gotoLogin() {
+  //   this.router.navigate(['login']);
+  // }
 
   setSelected(selectedValue: string) {
     this.navBars.fill(false);
@@ -53,9 +66,7 @@ export class AppComponent implements OnInit {
       this.navBars[3] = true;
     }
 
-    if (this.navDisplay == 'block' && this.showingMobileBar) {
-      this.hideMenu();
-    }
+    this.hideMenu();
   }
 
   setDisplay() {
@@ -67,6 +78,8 @@ export class AppComponent implements OnInit {
   }
 
   hideMenu() {
-    this.navDisplay = 'none';
+    if (this.navDisplay == 'block' && this.showingMobileBar) {
+      this.navDisplay = 'none';
+    }
   }
 }

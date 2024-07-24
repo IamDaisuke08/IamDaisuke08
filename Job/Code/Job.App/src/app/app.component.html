@@ -7,18 +7,28 @@
         </a>
         <label>Ðaisuke08 Inc.</label>
       </div>
-
       <div class="nav-holder" [style.display]="navDisplay">
         <ul class="navigation">
           <li><a routerLink="" class="nav-custom" [attr.nav-selected]="navBars[0]" (click)="setSelected('home')">Home</a></li>
           <li><a routerLink="application" class="nav-custom" [attr.nav-selected]="navBars[1]" (click)="setSelected('application')">Application</a></li> 
           <li><a routerLink="location" class="nav-custom" [attr.nav-selected]="navBars[2]" (click)="setSelected('location')">Locations</a></li>
           <li><a routerLink="job-status" class="nav-custom" [attr.nav-selected]="navBars[3]" (click)="setSelected('jobstatus')">Job Status</a></li>
-          <!-- <li><a href="#" class="nav-link nav-custom">FAQs</a></li>
-          <li><a href="#" class="nav-link nav-custom">About</a></li> -->
+          <div class="user-inital">
+            <div class="initial">{{ Initial }}</div>
+            <div class="user-info">
+              <p>Hi, <a href="#" class="user-name">{{ UserName }}</a>!</p>
+              @if(!IsLoggedIn) {
+                <div><a routerLink="login" class="user-menu" (click)="hideMenu()">Login</a></div>
+                <div><a routerLink="login" class="user-menu" (click)="hideMenu()">Register</a></div>
+                <p class="info-note">saving is disabled, please log in</p>
+              }
+              @else {
+                <div><a (click)="logout();" class="user-menu">Logout</a></div>
+              }
+            </div>
+          </div>
         </ul>
       </div>
-
       <a class="nav-mobile-bar icon" (click)="setDisplay()">
         <i class="fa fa-bars"></i>
       </a>

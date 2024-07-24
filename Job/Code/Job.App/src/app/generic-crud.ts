@@ -7,73 +7,81 @@ import { GenericHttpService } from "@services/generic-http.service";
   })
 export class GenericCrud<T extends GenericItem> {
 
-    @Input() collection : T[] = [];
+  @Input() collection : T[] = [];
 
-    constructor(public service : GenericHttpService<T>) {
+  get IsLoggedIn() {
+    return sessionStorage.getItem('username') !== null;
+  }
+
+  constructor(public service : GenericHttpService<T>) {
+  }
+
+  onEdit(item : T) {
+    this.collection.forEach(s => {
+      s.onEditMode = false;
+    });
+    item.onEditMode = true;
+  }
+
+  onCancelEdit(item : T) {
+    item.onEditMode = false;
+    if (item.id == 0) {
+      this.collection.splice(0, 1);
     }
+  }
 
-    onEdit(item : T) {
-        this.collection.forEach(s => {
-          s.onEditMode = false;
-        });
-        item.onEditMode = true;
+  onSave(path : string, item: T) {
+    if (this.IsLoggedIn) {
+      if (item.id == 0) {
+        this.add(path, item);
+      } else {
+        this.update(path, item);
       }
-    
-      onCancelEdit(item : T) {
-        item.onEditMode = false;
-        if (item.id == 0) {
-          this.collection.splice(0, 1);
-        }
-      }
-    
-      onSave(path : string, item: T) {
-        if (item.id == 0) {
-          this.add(path, item);
-        } else {
-          this.update(path, item);
-        }
-      }
-    
-      onDelete(path : string, item: T) {
-        if (confirm('Are you sure you want to delete this item?')) {
-          this.service.delete(path, item.id).subscribe(() => {
-            console.log(`deleted jobstatus ${item.id}`);
-          },
-          (error : any) => {
-            console.log(error.message);
-          },
-          () => {
-            let index = this.collection.indexOf(item);
-            this.collection.splice(index, 1);
-          });
-        }
-      }
-    
-      private update(path : string, item: T) {
-        this.service.update(path, item).subscribe(() => {
-          let log = `save successfull: ${ JSON.stringify(item) }`;
-          console.log(log);
+    }
+  }
+  
+  onDelete(path : string, item: T) {
+    if (this.IsLoggedIn) {
+      if (confirm('Are you sure you want to delete this item?')) {
+        this.service.delete(path, item.id).subscribe(() => {
+          console.log(`deleted jobstatus ${item.id}`);
         },
         (error : any) => {
           console.log(error.message);
         },
         () => {
-          item.onEditMode = false;
+          let index = this.collection.indexOf(item);
+          this.collection.splice(index, 1);
         });
       }
-    
-      private add(path : string, item: T) {
-        this.service.add(path, item).subscribe((newItem : any) => {
-          let log = `save successfull: ${ JSON.stringify(newItem) }`;
-          console.log(log);
-          this.collection.splice(0, 1);
-          this.collection.push(newItem);
-        },
-        (error : any) => {
-          console.log(error.message);
-        },
-        () => {
-          item.onEditMode = false;
-        });
-      }
+    }
+  }
+
+  private update(path : string, item: T) {
+    this.service.update(path, item).subscribe(() => {
+      let log = `save successfull: ${ JSON.stringify(item) }`;
+      console.log(log);
+    },
+    (error : any) => {
+      console.log(error.message);
+    },
+    () => {
+      item.onEditMode = false;
+    });
+  }
+
+  private add(path : string, item: T) {
+    this.service.add(path, item).subscribe((newItem : any) => {
+      let log = `save successfull: ${ JSON.stringify(newItem) }`;
+      console.log(log);
+      this.collection.splice(0, 1);
+      this.collection.push(newItem);
+    },
+    (error : any) => {
+      console.log(error.message);
+    },
+    () => {
+      item.onEditMode = false;
+    });
+  }
 }

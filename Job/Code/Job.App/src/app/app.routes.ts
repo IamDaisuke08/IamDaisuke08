@@ -5,6 +5,7 @@ import { LocationComponent } from './location/location.component';
 import { ApplicationComponent } from './application/application.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
     { path : '', component: HomeComponent },
@@ -12,5 +13,6 @@ export const routes: Routes = [
     { path : 'job-status', component: JobStatusComponent },
     { path : 'location', component: LocationComponent},
     { path : 'form/:id', component: ApplicationFormComponent },
+    { path : 'login', component: LoginComponent },
     { path : '**', component: NotFoundComponent }
 ];

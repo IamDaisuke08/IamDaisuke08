@@ -4,6 +4,6 @@ namespace Job.Services.Authentication.Command
 {
     public interface ILoginHandler
     {
-        Task<string> Login(LoginRequest request, CancellationToken cancellationToken);
+        Task<AppUserDTO> Login(LoginRequest request, CancellationToken cancellationToken);
     }
 }

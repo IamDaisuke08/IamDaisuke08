@@ -64,9 +64,94 @@
     cursor: pointer;
 }
 
+.user-inital {
+    background-color: var(--theme-btn-bg-color);
+    width: 2.3rem;
+    font-size: x-large;
+    font-weight: bolder;
+    border-radius: 1.1rem;
+    padding-inline: 0.5rem;
+    margin-block: auto;
+    margin-left: 0.5rem;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.user-inital:hover .user-info { 
+    display: flex; 
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.initial {
+    margin-block: auto;
+}
+
+.user-info {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: var(--theme-mobile-menu-bg);
+    right: 0;
+    font-size: small;
+    border-radius: 0.5rem 0 0.5rem 0.5rem;
+    padding: 1rem;
+    text-align: right;
+    font-weight: normal;
+    min-width: 10rem;
+}
+
+.user-menu {
+    color: var(--theme-txt);
+    text-decoration: none;
+    padding: .3rem 1rem;
+}
+
+.user-menu:hover {
+    background-color: var(--theme-btn-bg-color-drk);
+    border-radius: 0.2rem;
+}
+
+.info-note {
+    font-size: x-small;
+    font-style: italic;
+    width: 10rem;
+}
+
 @media (max-width: 62rem) {
     .nav-holder {
         display: none;
+    }
+
+    .user-inital {
+        background-color: transparent;
+        width: 100%;
+        margin: auto 0 1rem 0;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .initial {
+        display: none;
+    }
+
+    .user-info {
+        display: block!important;
+        z-index: 9999;
+        background-color: transparent;
+        position: inherit;
+        padding: 0 1rem 0 0;
+        margin: 0;
+    }
+
+    .info-note {
+        width: auto;
+    }
+
+    .user-menu {
+        padding: 0;
+        background-color: transparent!important;
     }
 
     .navigation {
@@ -75,12 +160,14 @@
         position: fixed;
         background-color: var(--theme-mobile-menu-bg);
         inset: 0 0 0 50%;
-        padding: min(30vh, 4rem) 2rem;
+        padding-top: min(30vh, 3rem);
+        padding-left: 2rem;
         gap: 1rem;
     }
 
     .nav-mobile-bar {
         display: block;
         z-index: 9999;
+        margin-left: 1rem;
     }
 }

@@ -18,7 +18,7 @@ namespace Job.Services.Authentication.Command
             _jwtProvider = jwtProvider;
         }
 
-        public async Task<string> Login(LoginRequest request, CancellationToken cancellationToken)
+        public async Task<AppUserDTO> Login(LoginRequest request, CancellationToken cancellationToken)
         {
             var user = await _context.AppUsers.FirstOrDefaultAsync(x => x.Name == request.username, cancellationToken);
             var valid = user != null && user.Password == request.password;
@@ -28,7 +28,13 @@ namespace Job.Services.Authentication.Command
             }
 
             var token = _jwtProvider.Generate(user);
-            return token;
+            return new AppUserDTO()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                Token = token
+            };
         }
     }
 }

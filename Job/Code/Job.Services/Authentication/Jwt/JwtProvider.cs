@@ -35,7 +35,7 @@ namespace Job.Services.Authentication.Jwt
                 _option.Audience,
                 claims,
                 null,
-                DateTime.UtcNow.AddMinutes(1),
+                DateTime.UtcNow.AddMinutes(30),
                 signingCredentials);
 
             var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);

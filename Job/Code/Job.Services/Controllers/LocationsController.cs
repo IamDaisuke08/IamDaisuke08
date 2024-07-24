@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Job.Services.Models;
 using Job.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Job.Services.Controllers
 {
@@ -22,7 +23,7 @@ namespace Job.Services.Controllers
         }
 
         // GET: api/Locations
-        [HttpGet]
+        [Authorize, HttpGet]
         public async Task<ActionResult<IEnumerable<LocationDTO>>> GetLocations()
         {
             return await _context.Locations
@@ -31,7 +32,7 @@ namespace Job.Services.Controllers
         }
 
         // GET: api/Locations/5
-        [HttpGet("{id}")]
+        [Authorize, HttpGet("{id}")]
         public async Task<ActionResult<LocationDTO>> GetLocation(long id)
         {
             var location = await _context.Locations.FindAsync(id);
@@ -45,7 +46,7 @@ namespace Job.Services.Controllers
 
         // PUT: api/Locations/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [Authorize, HttpPut("{id}")]
         public async Task<IActionResult> PutLocation(long id, LocationDTO location)
         {
             if (id != location.Id)
@@ -76,7 +77,7 @@ namespace Job.Services.Controllers
 
         // POST: api/Locations
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [Authorize, HttpPost]
         public async Task<ActionResult<LocationDTO>> PostLocation(LocationDTO location)
         {
             var newLocation = this.DtoToEntity(location);
@@ -87,7 +88,7 @@ namespace Job.Services.Controllers
         }
 
         // DELETE: api/Locations/5
-        [HttpDelete("{id}")]
+        [Authorize, HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLocation(long id)
         {
             var location = await _context.Locations.FindAsync(id);

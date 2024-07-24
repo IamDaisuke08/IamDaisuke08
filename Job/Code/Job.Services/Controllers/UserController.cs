@@ -17,19 +17,19 @@ namespace Job.Services.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult> Login(LoginRequest request, CancellationToken cancellationToken)
+        public async Task<ActionResult<AppUserDTO>> Login(LoginRequest request, CancellationToken cancellationToken)
         {
-            var token = string.Empty;
+            AppUserDTO user;
             try
             {
-                token = await _loginHandler.Login(request, cancellationToken);
+                user = await _loginHandler.Login(request, cancellationToken);
             }
             catch (InvalidCredentialException)
             {
                 return Unauthorized("Invalid Credentials");
             }
 
-            return Ok(token);
+            return user;
         }
     }
 }
