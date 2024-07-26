@@ -1,13 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GenericCrud } from '@app/generic-crud';
 import { ApplicationItem } from '@models/applicationItem';
 import { LocationItem } from '@models/locationItem';
 import { JobStatusItem } from '@models/jobStatusItem';
 import { GenericHttpService } from '@services/generic-http.service';
-import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApplicationBoxComponent } from '@app/application-box/application-box.component';
+import { AuthorisationService } from '@services/auth-service';
 
 @Component({
   selector: 'application-boxes',
@@ -16,17 +16,15 @@ import { ApplicationBoxComponent } from '@app/application-box/application-box.co
   templateUrl: './application-boxes.component.html',
   styleUrl: './application-boxes.component.css'
 })
-export class ApplicationBoxesComponent extends GenericCrud<ApplicationItem> implements OnInit{
+export class ApplicationBoxesComponent extends GenericCrud<ApplicationItem> {
   path = "JobApplications";
   @Input() locations : LocationItem[] = [];
   @Input() status : JobStatusItem[] = [];
   
-  constructor(override service : GenericHttpService<ApplicationItem>, private router : Router) {
-    super(service);
-  }
-  
-  ngOnInit(): void {
-    
+  constructor(
+    override service : GenericHttpService<ApplicationItem>, 
+    override auth : AuthorisationService) {
+    super(service, auth);
   }
 
   getLocation(value : number) : string {

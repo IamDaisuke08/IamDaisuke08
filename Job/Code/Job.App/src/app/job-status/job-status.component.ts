@@ -1,6 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { JobStatusListComponent } from '@app/job-status-list/job-status-list.component';
 import { JobStatusItem } from '@models/jobStatusItem';
+import { AuthorisationService } from '@services/auth-service';
 import { DummyService } from '@services/dummy-service';
 import { GenericHttpService } from '@services/generic-http.service';
 import { finalize } from 'rxjs';
@@ -19,10 +20,16 @@ export class JobStatusComponent implements AfterViewInit {
   mainCollection : JobStatusItem[] = [];
 
   get IsLoggedIn() {
-    return sessionStorage.getItem('username') !== null;
+    let logged = false;
+    const auths = this.auth.user$.subscribe(user => logged = user !== null);
+    auths.unsubscribe();
+    return logged;
   }
 
-  constructor(private service : GenericHttpService<JobStatusItem>, private dummy : DummyService) { 
+  constructor(
+    private service : GenericHttpService<JobStatusItem>, 
+    private dummy : DummyService,
+    public auth : AuthorisationService) { 
   }
   ngAfterViewInit(): void {
     this.load();

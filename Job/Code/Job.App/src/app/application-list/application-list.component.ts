@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GenericCrud } from '@app/generic-crud';
 import { ApplicationItem } from '@models/applicationItem';
@@ -7,6 +7,7 @@ import { GenericHttpService } from '@services/generic-http.service';
 import { LocationItem } from '@models/locationItem';
 import { JobStatusItem } from '@models/jobStatusItem';
 import { Router } from '@angular/router';
+import { AuthorisationService } from '@services/auth-service';
 
 @Component({
   selector: 'application-list',
@@ -15,18 +16,17 @@ import { Router } from '@angular/router';
   templateUrl: './application-list.component.html',
   styleUrl: './application-list.component.css'
 })
-export class ApplicationListComponent extends GenericCrud<ApplicationItem> implements OnInit {
+export class ApplicationListComponent extends GenericCrud<ApplicationItem> {
 
   path = "JobApplications";
   @Input() locations : LocationItem[] = [];
   @Input() status : JobStatusItem[] = [];
 
-  constructor(override service : GenericHttpService<ApplicationItem>, private router : Router) {
-    super(service);
-  }
-
-  ngOnInit(): void {
-
+  constructor(
+    override service : GenericHttpService<ApplicationItem>, 
+    private router : Router,
+    override auth : AuthorisationService) {
+    super(service, auth);
   }
 
   saveApplication(item: ApplicationItem): void {

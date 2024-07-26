@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { AuthorisationService } from '@services/auth-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterModule],
+  imports: [RouterOutlet, RouterModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -16,19 +18,8 @@ export class AppComponent implements OnInit {
   navBars = new Array(4).fill(false);
   showingMobileBar : boolean = false;
 
-  get UserName() {
-    return sessionStorage.getItem('username') ?? 'Anonymous';
-  }
-
-  get Initial() {
-    return sessionStorage.getItem('username')?.substring(0, 1).toUpperCase() ?? '?';
-  }
-
-  get IsLoggedIn() {
-    return sessionStorage.getItem('username') !== null;
-  }
-
-  constructor(public breakepoint : BreakpointObserver, private router : Router) {
+  constructor(public breakepoint : BreakpointObserver, 
+    public auth : AuthorisationService) {
   }
 
   ngOnInit(): void {
@@ -46,13 +37,10 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
+    this.auth.user$.next(null);
     sessionStorage.clear();
     this.hideMenu();
   }
-
-  // gotoLogin() {
-  //   this.router.navigate(['login']);
-  // }
 
   setSelected(selectedValue: string) {
     this.navBars.fill(false);

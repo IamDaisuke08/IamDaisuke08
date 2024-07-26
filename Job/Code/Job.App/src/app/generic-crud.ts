@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { GenericItem } from "@models/genericItem";
+import { AuthorisationService } from "@services/auth-service";
 import { GenericHttpService } from "@services/generic-http.service";
 
 @Component({
@@ -10,10 +11,15 @@ export class GenericCrud<T extends GenericItem> {
   @Input() collection : T[] = [];
 
   get IsLoggedIn() {
-    return sessionStorage.getItem('username') !== null;
+    let logged = false;
+    const auths = this.auth.user$.subscribe(user => logged = user !== null);
+    auths.unsubscribe();
+    return logged;
   }
 
-  constructor(public service : GenericHttpService<T>) {
+  constructor(
+    public service : GenericHttpService<T>,
+    public auth : AuthorisationService) {
   }
 
   onEdit(item : T) {

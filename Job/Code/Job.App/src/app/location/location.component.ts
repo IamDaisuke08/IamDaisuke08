@@ -5,6 +5,7 @@ import { LocationListComponent } from '@app/location-list/location-list.componen
 import { LocationMapListComponent } from '@app/location-map-list/location-map-list.component';
 import { DummyService } from '@services/dummy-service';
 import { finalize } from 'rxjs';
+import { AuthorisationService } from '@services/auth-service';
 
 @Component({
   selector: 'location',
@@ -20,9 +21,16 @@ export class LocationComponent implements AfterViewInit {
   loaded = false;
 
   get IsLoggedIn() {
-    return sessionStorage.getItem('username') !== null;
+    let logged = false;
+    const auths = this.auth.user$.subscribe(user => logged = user !== null);
+    auths.unsubscribe();
+    return logged;
   }
-  constructor(private service : GenericHttpService<LocationItem>, private dummy : DummyService) { 
+
+  constructor(
+    private service : GenericHttpService<LocationItem>, 
+    private dummy : DummyService,
+    public auth : AuthorisationService) { 
   }
   
   ngAfterViewInit(): void {

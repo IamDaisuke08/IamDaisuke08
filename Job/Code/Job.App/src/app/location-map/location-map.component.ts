@@ -12,13 +12,6 @@ export class LocationMapComponent {
 
   @ViewChild('mapContainer', { static: false }) gmap!: ElementRef;
   
-  // @Input() lat = 0;
-  // @Output() latChange = new EventEmitter<number>();
-  // @Input() lng = 0;
-  // @Output() lngChange = new EventEmitter<number>();
-  // @Input() zoom = 0;
-  // @Output() zoomChange = new EventEmitter<number>();
-
   @Input() locItem! : LocationItem;
   @Output() locItemChange = new EventEmitter<LocationItem>();
 

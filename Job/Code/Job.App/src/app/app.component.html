@@ -14,16 +14,31 @@
           <li><a routerLink="location" class="nav-custom" [attr.nav-selected]="navBars[2]" (click)="setSelected('location')">Locations</a></li>
           <li><a routerLink="job-status" class="nav-custom" [attr.nav-selected]="navBars[3]" (click)="setSelected('jobstatus')">Job Status</a></li>
           <div class="user-inital">
-            <div class="initial">{{ Initial }}</div>
+            <div class="initial">
+              @if (auth.userInitial$ | async; as init){
+                {{ init }}
+              }
+              @else {
+                ?
+              }
+            </div>
             <div class="user-info">
-              <p>Hi, <a href="#" class="user-name">{{ UserName }}</a>!</p>
-              @if(!IsLoggedIn) {
+              <p>Hi, <a href="#" class="user-name">
+                @if (auth.user$ | async; as user) {
+                  {{ user.name }}
+                }
+                @else {
+                  Anonymous
+                }
+              </a>
+              </p>
+              @if(auth.user$ | async; as user) {
+                <div><a (click)="logout();" class="user-menu">Logout</a></div>
+              }
+              @else {
                 <div><a routerLink="login" class="user-menu" (click)="hideMenu()">Login</a></div>
                 <div><a routerLink="login" class="user-menu" (click)="hideMenu()">Register</a></div>
                 <p class="info-note">saving is disabled, please log in</p>
-              }
-              @else {
-                <div><a (click)="logout();" class="user-menu">Logout</a></div>
               }
             </div>
           </div>

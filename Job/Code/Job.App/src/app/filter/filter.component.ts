@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.css'
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent {
 
   @Input() list : any[] = [];
 
@@ -22,9 +22,6 @@ export class FilterComponent implements OnInit {
   @Input() labelFilter : string = "";
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   updateFilter(value: any) {
     if (value == '0') {

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GenericHttpService } from '@services/generic-http.service';
 import { GenericCrud } from '@app/generic-crud';
+import { AuthorisationService } from '@services/auth-service';
 
 @Component({
   selector: 'job-status-list',
@@ -15,8 +16,8 @@ import { GenericCrud } from '@app/generic-crud';
 export class JobStatusListComponent extends GenericCrud<JobStatusItem> implements OnInit {
   path = "JobStatus";
 
-  constructor(override service : GenericHttpService<JobStatusItem>) { 
-    super(service);
+  constructor(override service : GenericHttpService<JobStatusItem>, override auth : AuthorisationService) { 
+    super(service, auth);
   }
 
   ngOnInit(): void {

@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { ApplicationBoxesComponent } from '@app/application-boxes/application-boxes.component';
 import { DummyService } from '@services/dummy-service';
 import { finalize } from 'rxjs';
+import { AuthorisationService } from '@services/auth-service';
 
 @Component({
   selector: 'application',
@@ -30,14 +31,43 @@ export class ApplicationComponent implements AfterViewInit {
   filterStat: any;
   loaded = false;
 
+  /**************************************************************************************************************
+   * disabling declarative implmenentation, does not fit the 'offline' mode objects
+
+  jobApps$ = this.service.get(this.path).pipe(
+    catchError(() => of(this.dummy.getApplications()))
+  );
+
+  filtest = new BehaviorSubject("");
+
+  visibleJobs$ = this.filtest.asObservable().pipe(
+    switchMap(() => {
+      return this.jobApps$.pipe(
+        map((apps) => {
+          console.log('filttest', this.filtest.value);
+          let filtered : any = apps;
+          if (this.filtest.value !== '') {
+            console.log('===============>>> filtering');
+            filtered = filtered.filter((x: any)=> x.companyName == this.filtest.value); 
+          }
+          return filtered;
+        }))
+    })
+  );
+  ****************************************************************************************************************/
+
   get IsLoggedIn() {
-    return sessionStorage.getItem('username') !== null;
+    let logged = false;
+    const auths = this.auth.user$.subscribe(user => logged = user !== null);
+    auths.unsubscribe();
+    return logged;
   }
 
   constructor(
     private service : GenericHttpService<ApplicationItem>, 
     private router : Router,
-    private dummy : DummyService) { 
+    private dummy : DummyService,
+    public auth : AuthorisationService) { 
   }
 
   ngAfterViewInit(): void {
@@ -48,7 +78,7 @@ export class ApplicationComponent implements AfterViewInit {
   {
     const jobGetter = this.service.get(this.path);
     jobGetter.pipe(
-      finalize(() => this.loaded = true)
+      finalize(() => this.loaded = true),
     )
     .subscribe({
       next: (collection : any) => {

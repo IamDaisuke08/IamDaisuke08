@@ -15,7 +15,6 @@ import { AuthorisationService } from '@services/auth-service';
 export class LoginComponent implements OnInit {
 
   loginForm! : FormGroup
-  path = "Mail";
   unsuccessful : boolean | null = null;
 
   get username() {
@@ -48,6 +47,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('username', appUser.name);
           sessionStorage.setItem('email', appUser.email);
           sessionStorage.setItem('loginToken', appUser.token);
+          this.auth.user$.next(appUser);
           this.router.navigate(['']);
       },
       error: (error : any) => {

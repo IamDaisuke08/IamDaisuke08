@@ -9,9 +9,9 @@ import { LocationItem } from "@models/locationItem";
 export class DummyService {
     getApplications() : ApplicationItem[] {
         return [
-            new ApplicationItem(1, 'Test 1', 'Test Company 1', 1, 1, 'Test Data Only', new Date()),
-            new ApplicationItem(2, 'Test 2', 'Test Company 2', 2, 2, 'Test Data Only', new Date()),
-            new ApplicationItem(3, 'Test 3', 'Test Company 3', 3, 3, 'Test Data Only', new Date()),
+            new ApplicationItem(1, 'Test 1', 'Software Engineer', 1, 1, 'Test Data Only', new Date()),
+            new ApplicationItem(2, 'Test 2', 'Lead Engineer', 2, 2, 'Test Data Only', new Date()),
+            new ApplicationItem(3, 'Test 3', 'Tech Business Analyst', 3, 3, 'Test Data Only', new Date()),
         ];
     }
 

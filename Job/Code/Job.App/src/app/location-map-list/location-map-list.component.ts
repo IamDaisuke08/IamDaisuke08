@@ -1,9 +1,10 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GenericCrud } from '@app/generic-crud';
 import { LocationMapComponent } from '@app/location-map/location-map.component';
 import { LocationItem } from '@models/locationItem';
+import { AuthorisationService } from '@services/auth-service';
 import { GenericHttpService } from '@services/generic-http.service';
 
 @Component({
@@ -13,15 +14,16 @@ import { GenericHttpService } from '@services/generic-http.service';
   templateUrl: './location-map-list.component.html',
   styleUrl: './location-map-list.component.css'
 })
-export class LocationMapListComponent extends GenericCrud<LocationItem> implements AfterViewInit, OnInit {
+export class LocationMapListComponent extends GenericCrud<LocationItem> implements OnInit {
 
   path = "Locations";
-  selectedItem! : LocationItem;
+  selectedItem = new LocationItem(0, '', new Date());
   showMap = true;
 
   constructor(override service : GenericHttpService<LocationItem>, 
-    public breakepoint : BreakpointObserver) {
-    super(service);
+    public breakepoint : BreakpointObserver,
+    override auth : AuthorisationService) {
+    super(service, auth);
   }
 
   ngOnInit(): void {
@@ -35,18 +37,6 @@ export class LocationMapListComponent extends GenericCrud<LocationItem> implemen
   ngOnChanges() {
     if (this.selectedItem != undefined && this.selectedItem.id == -1 && this.collection.length !== 0) {
       this.setSelected(this.collection[0].id);
-    }
-  }
-
-  ngAfterViewInit(): void {
-    if (this.collection.length !== 0) {
-      this.selectedItem = this.collection[0];
-    }
-    else {
-      this.selectedItem = new LocationItem(-1, "", new Date());
-      this.selectedItem.lat = -36.8496969;
-      this.selectedItem.lng = 174.7543261;
-      this.selectedItem.zoom = 11;
     }
   }
 
