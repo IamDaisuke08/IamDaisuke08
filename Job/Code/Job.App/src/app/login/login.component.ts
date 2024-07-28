@@ -44,9 +44,9 @@ export class LoginComponent implements OnInit {
     this.auth.LogIn(user, pwd).subscribe({
       next: (user : any) => {
           let appUser : AppUser = user;
-          sessionStorage.setItem('username', appUser.name);
-          sessionStorage.setItem('email', appUser.email);
-          sessionStorage.setItem('loginToken', appUser.token);
+          // sessionStorage.setItem('username', appUser.name);
+          // sessionStorage.setItem('email', appUser.email);
+          // sessionStorage.setItem('loginToken', appUser.token);
           this.auth.user$.next(appUser);
           this.router.navigate(['']);
       },

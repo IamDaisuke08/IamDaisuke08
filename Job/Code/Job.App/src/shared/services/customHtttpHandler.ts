@@ -7,9 +7,6 @@ import { throwError } from 'rxjs';
   })
 export class CustomHttpHandlers {
 
-    constructor() { 
-    }
-
     public handleError(error : HttpErrorResponse) {
         console.log('ERROR: ', error.error);
         return throwError(() => new Error('An error occured while connecting to the server. Please try again.', error.error));

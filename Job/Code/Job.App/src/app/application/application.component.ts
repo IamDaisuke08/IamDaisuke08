@@ -11,11 +11,12 @@ import { ApplicationBoxesComponent } from '@app/application-boxes/application-bo
 import { DummyService } from '@services/dummy-service';
 import { finalize } from 'rxjs';
 import { AuthorisationService } from '@services/auth-service';
+import { LoadingComponent } from '@app/loading/loading.component';
 
 @Component({
   selector: 'application',
   standalone: true,
-  imports: [ApplicationListComponent, FilterComponent, CommonModule, ApplicationBoxesComponent],
+  imports: [ApplicationListComponent, FilterComponent, CommonModule, ApplicationBoxesComponent, LoadingComponent],
   templateUrl: './application.component.html',
   styleUrl: './application.component.css'
 })
@@ -71,6 +72,7 @@ export class ApplicationComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
     this.loadStatus();
   }
 

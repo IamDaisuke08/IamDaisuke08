@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from "@env/environment";
 import { BehaviorSubject, map} from "rxjs";
@@ -12,10 +12,9 @@ export class AuthorisationService {
     readonly path = 'User'
     readonly baseUrl : string = `${ environment.API_URL }api/`; //"http://localhost:5202/api/";
 
+    client = inject(HttpClient);
     user$ = new BehaviorSubject<AppUser | null>(null);
     userInitial$ = this.user$.pipe(map((user) => user?.name.substring(0, 1).toUpperCase()));
-
-    constructor(private client : HttpClient) { }
 
     private getStandarOptions() : any {
         return {

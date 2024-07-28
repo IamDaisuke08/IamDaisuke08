@@ -64,7 +64,5 @@
     </div>
 </ng-template>
 } @placeholder {
-    <div class="container p-5 mt-5 d-flex justify-content-center align-items-center align-self-center">
-        <span class="badge bg-dark text-white" style="font-size: xx-large;">Loading data, please wait...</span>
-    </div>
+<loading [status]="!loaded"></loading>
 }

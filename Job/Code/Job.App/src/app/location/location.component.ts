@@ -6,11 +6,12 @@ import { LocationMapListComponent } from '@app/location-map-list/location-map-li
 import { DummyService } from '@services/dummy-service';
 import { finalize } from 'rxjs';
 import { AuthorisationService } from '@services/auth-service';
+import { LoadingComponent } from '@app/loading/loading.component';
 
 @Component({
   selector: 'location',
   standalone: true,
-  imports: [LocationListComponent, LocationMapListComponent],
+  imports: [LocationListComponent, LocationMapListComponent, LoadingComponent],
   templateUrl: './location.component.html',
   styleUrl: './location.component.css'
 })

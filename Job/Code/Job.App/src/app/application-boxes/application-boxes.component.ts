@@ -7,7 +7,6 @@ import { GenericHttpService } from '@services/generic-http.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApplicationBoxComponent } from '@app/application-box/application-box.component';
-import { AuthorisationService } from '@services/auth-service';
 
 @Component({
   selector: 'application-boxes',
@@ -21,10 +20,8 @@ export class ApplicationBoxesComponent extends GenericCrud<ApplicationItem> {
   @Input() locations : LocationItem[] = [];
   @Input() status : JobStatusItem[] = [];
   
-  constructor(
-    override service : GenericHttpService<ApplicationItem>, 
-    override auth : AuthorisationService) {
-    super(service, auth);
+  constructor(override service : GenericHttpService<ApplicationItem>) {
+    super(service);
   }
 
   getLocation(value : number) : string {

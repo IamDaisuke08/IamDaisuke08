@@ -9,12 +9,12 @@ import { JobStatusItem } from '@models/jobStatusItem';
 import { GenericCrud } from '@app/generic-crud';
 import { finalize } from 'rxjs';
 import { DummyService } from '@services/dummy-service';
-import { AuthorisationService } from '@services/auth-service';
+import { LoadingComponent } from '@app/loading/loading.component';
 
 @Component({
   selector: 'application-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LoadingComponent],
   templateUrl: './application-form.component.html',
   styleUrl: './application-form.component.css'
 })
@@ -34,9 +34,8 @@ export class ApplicationFormComponent extends GenericCrud<ApplicationItem> imple
     override service : GenericHttpService<ApplicationItem>, 
     private route : ActivatedRoute, 
     private router : Router,
-    private dummy : DummyService,
-    override auth : AuthorisationService) {
-    super(service, auth);
+    private dummy : DummyService) {
+    super(service);
   }
   ngAfterViewInit(): void {
     this.loadStatus();

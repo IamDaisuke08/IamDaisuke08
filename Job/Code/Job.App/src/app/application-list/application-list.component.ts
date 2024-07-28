@@ -7,7 +7,6 @@ import { GenericHttpService } from '@services/generic-http.service';
 import { LocationItem } from '@models/locationItem';
 import { JobStatusItem } from '@models/jobStatusItem';
 import { Router } from '@angular/router';
-import { AuthorisationService } from '@services/auth-service';
 
 @Component({
   selector: 'application-list',
@@ -24,9 +23,8 @@ export class ApplicationListComponent extends GenericCrud<ApplicationItem> {
 
   constructor(
     override service : GenericHttpService<ApplicationItem>, 
-    private router : Router,
-    override auth : AuthorisationService) {
-    super(service, auth);
+    private router : Router) {
+    super(service);
   }
 
   saveApplication(item: ApplicationItem): void {

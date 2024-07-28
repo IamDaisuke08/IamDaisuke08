@@ -1,7 +1,7 @@
 .login-content {
     display: flex;
     height: 90svh;
-    width: 50svw;
+    width: minmax(50rem, 50svw);
     justify-content: center;
     margin: auto;
     /* border: 1px solid yellow; */

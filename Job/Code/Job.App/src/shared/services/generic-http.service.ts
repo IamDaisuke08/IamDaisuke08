@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CustomHttpHandlers } from '@services/customHtttpHandler';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs';
@@ -11,12 +11,8 @@ import { environment } from '@env/environment';
 export class GenericHttpService<T extends GenericItem> extends CustomHttpHandlers {
 
   readonly baseUrl : string = `${ environment.API_URL }api/`; //"http://localhost:5202/api/";
+  client = inject(HttpClient);
  
-  constructor(private client : HttpClient) 
-  { 
-    super();
-  }
-
   private getStandarOptions() : any {
     let token = sessionStorage.getItem('loginToken');
     return {

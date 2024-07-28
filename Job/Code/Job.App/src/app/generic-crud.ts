@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, inject, Input } from "@angular/core";
 import { GenericItem } from "@models/genericItem";
 import { AuthorisationService } from "@services/auth-service";
 import { GenericHttpService } from "@services/generic-http.service";
@@ -9,6 +9,7 @@ import { GenericHttpService } from "@services/generic-http.service";
 export class GenericCrud<T extends GenericItem> {
 
   @Input() collection : T[] = [];
+  auth = inject(AuthorisationService);
 
   get IsLoggedIn() {
     let logged = false;
@@ -17,9 +18,7 @@ export class GenericCrud<T extends GenericItem> {
     return logged;
   }
 
-  constructor(
-    public service : GenericHttpService<T>,
-    public auth : AuthorisationService) {
+  constructor(public service : GenericHttpService<T>) {
   }
 
   onEdit(item : T) {

@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { GenericCrud } from '@app/generic-crud';
 import { LocationMapComponent } from '@app/location-map/location-map.component';
 import { LocationItem } from '@models/locationItem';
-import { AuthorisationService } from '@services/auth-service';
 import { GenericHttpService } from '@services/generic-http.service';
 
 @Component({
@@ -21,9 +20,8 @@ export class LocationMapListComponent extends GenericCrud<LocationItem> implemen
   showMap = true;
 
   constructor(override service : GenericHttpService<LocationItem>, 
-    public breakepoint : BreakpointObserver,
-    override auth : AuthorisationService) {
-    super(service, auth);
+    public breakepoint : BreakpointObserver) {
+    super(service);
   }
 
   ngOnInit(): void {

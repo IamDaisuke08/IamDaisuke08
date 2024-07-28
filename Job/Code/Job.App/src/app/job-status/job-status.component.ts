@@ -1,5 +1,6 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, inject } from '@angular/core';
 import { JobStatusListComponent } from '@app/job-status-list/job-status-list.component';
+import { LoadingComponent } from '@app/loading/loading.component';
 import { JobStatusItem } from '@models/jobStatusItem';
 import { AuthorisationService } from '@services/auth-service';
 import { DummyService } from '@services/dummy-service';
@@ -9,7 +10,7 @@ import { finalize } from 'rxjs';
 @Component({
   selector: 'job-status',
   standalone: true,
-  imports: [JobStatusListComponent],
+  imports: [JobStatusListComponent, LoadingComponent],
   templateUrl: './job-status.component.html',
   styleUrl: './job-status.component.css'
 })
@@ -19,6 +20,10 @@ export class JobStatusComponent implements AfterViewInit {
   loaded = false;
   mainCollection : JobStatusItem[] = [];
 
+  dummy = inject(DummyService);
+  auth = inject(AuthorisationService);
+  service = inject(GenericHttpService<JobStatusItem>);
+
   get IsLoggedIn() {
     let logged = false;
     const auths = this.auth.user$.subscribe(user => logged = user !== null);
@@ -26,11 +31,6 @@ export class JobStatusComponent implements AfterViewInit {
     return logged;
   }
 
-  constructor(
-    private service : GenericHttpService<JobStatusItem>, 
-    private dummy : DummyService,
-    public auth : AuthorisationService) { 
-  }
   ngAfterViewInit(): void {
     this.load();
   }

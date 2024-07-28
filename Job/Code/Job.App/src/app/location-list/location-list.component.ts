@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { GenericHttpService } from '@services/generic-http.service';
 import { LocationItem } from '@models/locationItem';
 import { GenericCrud } from '@app/generic-crud';
-import { AuthorisationService } from '@services/auth-service';
 
 @Component({
   selector: 'location-list',
@@ -17,7 +16,7 @@ export class LocationListComponent extends GenericCrud<LocationItem> {
 
   path = "Locations";
 
-  constructor(override service : GenericHttpService<LocationItem>, override auth : AuthorisationService) {
-    super(service, auth);
+  constructor(override service : GenericHttpService<LocationItem>) {
+    super(service);
   }
 }
