@@ -1,10 +1,10 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, inject, OnDestroy } from '@angular/core';
 import { LocationItem } from '@models/locationItem';
 import { GenericHttpService } from '@services/generic-http.service';
 import { LocationListComponent } from '@app/location-list/location-list.component';
 import { LocationMapListComponent } from '@app/location-map-list/location-map-list.component';
 import { DummyService } from '@services/dummy-service';
-import { finalize } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { AuthorisationService } from '@services/auth-service';
 import { LoadingComponent } from '@app/loading/loading.component';
 
@@ -15,11 +15,17 @@ import { LoadingComponent } from '@app/loading/loading.component';
   templateUrl: './location.component.html',
   styleUrl: './location.component.css'
 })
-export class LocationComponent implements AfterViewInit {
+export class LocationComponent implements AfterViewInit, OnDestroy {
 
   path = "Locations";
   mainCollection : LocationItem[] = [];
   loaded = false;
+
+  service = inject(GenericHttpService<LocationItem>);
+  dummy = inject(DummyService);
+  auth = inject(AuthorisationService);
+
+  locSubs! : Subscription;
 
   get IsLoggedIn() {
     let logged = false;
@@ -28,10 +34,8 @@ export class LocationComponent implements AfterViewInit {
     return logged;
   }
 
-  constructor(
-    private service : GenericHttpService<LocationItem>, 
-    private dummy : DummyService,
-    public auth : AuthorisationService) { 
+  ngOnDestroy(): void {
+    this.locSubs?.unsubscribe();
   }
   
   ngAfterViewInit(): void {
@@ -41,7 +45,7 @@ export class LocationComponent implements AfterViewInit {
   private load()
   {
     const locGetter = this.service.get(this.path);
-    locGetter.pipe(
+    this.locSubs = locGetter.pipe(
       finalize(() => this.loaded = true)
     )
     .subscribe({

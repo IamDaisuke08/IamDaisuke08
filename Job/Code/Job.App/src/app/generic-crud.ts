@@ -1,15 +1,19 @@
-import { Component, inject, Input } from "@angular/core";
+import { Component, inject, Input, OnDestroy } from "@angular/core";
 import { GenericItem } from "@models/genericItem";
 import { AuthorisationService } from "@services/auth-service";
 import { GenericHttpService } from "@services/generic-http.service";
+import { finalize, Subscription } from "rxjs";
 
 @Component({
     template: ''
   })
-export class GenericCrud<T extends GenericItem> {
+export class GenericCrud<T extends GenericItem> implements OnDestroy {
 
   @Input() collection : T[] = [];
   auth = inject(AuthorisationService);
+  deleteSubs! : Subscription;
+  updateSubs! : Subscription;
+  addSubs! : Subscription;
 
   get IsLoggedIn() {
     let logged = false;
@@ -19,6 +23,12 @@ export class GenericCrud<T extends GenericItem> {
   }
 
   constructor(public service : GenericHttpService<T>) {
+  }
+
+  ngOnDestroy(): void {
+    this.deleteSubs?.unsubscribe();
+    this.updateSubs?.unsubscribe();
+    this.addSubs?.unsubscribe();
   }
 
   onEdit(item : T) {
@@ -48,45 +58,45 @@ export class GenericCrud<T extends GenericItem> {
   onDelete(path : string, item: T) {
     if (this.IsLoggedIn) {
       if (confirm('Are you sure you want to delete this item?')) {
-        this.service.delete(path, item.id).subscribe(() => {
-          console.log(`deleted jobstatus ${item.id}`);
-        },
-        (error : any) => {
-          console.log(error.message);
-        },
-        () => {
-          let index = this.collection.indexOf(item);
-          this.collection.splice(index, 1);
+        const delCommand = this.service.delete(path, item.id);
+        this.deleteSubs = delCommand.pipe(
+          finalize(() => {
+            let index = this.collection.indexOf(item);
+            this.collection.splice(index, 1);
+          }),
+        ).subscribe({
+          next: (() => console.log(`deleted jobstatus ${item.id}`)),
+          error: ((error : any) => console.log(error.message))
         });
       }
     }
   }
 
   private update(path : string, item: T) {
-    this.service.update(path, item).subscribe(() => {
-      let log = `save successfull: ${ JSON.stringify(item) }`;
-      console.log(log);
-    },
-    (error : any) => {
-      console.log(error.message);
-    },
-    () => {
-      item.onEditMode = false;
+    const updateCommand = this.service.update(path, item);
+    this.updateSubs = updateCommand.pipe(
+      finalize(() => item.onEditMode = false)
+    ).subscribe({
+      next: (() => {
+        let log = `save successfull: ${ JSON.stringify(item) }`;
+        console.log(log);
+      }),
+      error: ((error : any) => console.log(error.message))
     });
   }
 
   private add(path : string, item: T) {
-    this.service.add(path, item).subscribe((newItem : any) => {
-      let log = `save successfull: ${ JSON.stringify(newItem) }`;
-      console.log(log);
-      this.collection.splice(0, 1);
-      this.collection.push(newItem);
-    },
-    (error : any) => {
-      console.log(error.message);
-    },
-    () => {
-      item.onEditMode = false;
+    const addCommand = this.service.add(path, item);
+    this.addSubs = addCommand.pipe(
+      finalize(() => item.onEditMode = false)
+    ).subscribe({
+      next: ((newItem : any) => {
+        let log = `save successfull: ${ JSON.stringify(newItem) }`;
+        console.log(log);
+        this.collection.splice(0, 1);
+        this.collection.push(newItem);
+      }),
+      error: ((error : any) => console.log(error.message))
     });
   }
 }

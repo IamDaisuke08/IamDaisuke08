@@ -1,5 +1,5 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GenericCrud } from '@app/generic-crud';
 import { LocationMapComponent } from '@app/location-map/location-map.component';
@@ -19,13 +19,14 @@ export class LocationMapListComponent extends GenericCrud<LocationItem> implemen
   selectedItem = new LocationItem(0, '', new Date());
   showMap = true;
 
-  constructor(override service : GenericHttpService<LocationItem>, 
-    public breakepoint : BreakpointObserver) {
+  breakpoint = inject(BreakpointObserver);
+
+  constructor(override service : GenericHttpService<LocationItem>) {
     super(service);
   }
 
   ngOnInit(): void {
-    this.breakepoint
+    this.breakpoint
     .observe(['(max-width: 65rem)'])
     .subscribe((state: BreakpointState) => {
       this.showMap = !state.matches;

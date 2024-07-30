@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, inject } from '@angular/core';
+import { AfterViewInit, Component, inject, OnDestroy } from '@angular/core';
 import { JobStatusListComponent } from '@app/job-status-list/job-status-list.component';
 import { LoadingComponent } from '@app/loading/loading.component';
 import { JobStatusItem } from '@models/jobStatusItem';
 import { AuthorisationService } from '@services/auth-service';
 import { DummyService } from '@services/dummy-service';
 import { GenericHttpService } from '@services/generic-http.service';
-import { finalize } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 
 @Component({
   selector: 'job-status',
@@ -14,7 +14,7 @@ import { finalize } from 'rxjs';
   templateUrl: './job-status.component.html',
   styleUrl: './job-status.component.css'
 })
-export class JobStatusComponent implements AfterViewInit {
+export class JobStatusComponent implements AfterViewInit, OnDestroy {
 
   path = "JobStatus";
   loaded = false;
@@ -24,11 +24,17 @@ export class JobStatusComponent implements AfterViewInit {
   auth = inject(AuthorisationService);
   service = inject(GenericHttpService<JobStatusItem>);
 
+  statSubs! : Subscription;
+
   get IsLoggedIn() {
     let logged = false;
     const auths = this.auth.user$.subscribe(user => logged = user !== null);
     auths.unsubscribe();
     return logged;
+  }
+
+  ngOnDestroy(): void {
+    this.statSubs.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -38,7 +44,7 @@ export class JobStatusComponent implements AfterViewInit {
   private load()
   {
     const statGetter = this.service.get(this.path);
-    statGetter.pipe(
+    this.statSubs = statGetter.pipe(
       finalize(() => this.loaded = true)
     )
     .subscribe({

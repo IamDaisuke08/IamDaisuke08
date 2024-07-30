@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { GenericHttpService } from '@services/generic-http.service';
 import { ApplicationItem } from '@models/applicationItem';
@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { LocationItem } from '@models/locationItem';
 import { JobStatusItem } from '@models/jobStatusItem';
 import { GenericCrud } from '@app/generic-crud';
-import { finalize } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { DummyService } from '@services/dummy-service';
 import { LoadingComponent } from '@app/loading/loading.component';
 
@@ -18,7 +18,7 @@ import { LoadingComponent } from '@app/loading/loading.component';
   templateUrl: './application-form.component.html',
   styleUrl: './application-form.component.css'
 })
-export class ApplicationFormComponent extends GenericCrud<ApplicationItem> implements OnInit, AfterViewInit {
+export class ApplicationFormComponent extends GenericCrud<ApplicationItem> implements OnInit, AfterViewInit, OnDestroy {
 
   id : number = 0;
   job! : ApplicationItem;
@@ -27,6 +27,9 @@ export class ApplicationFormComponent extends GenericCrud<ApplicationItem> imple
 
   locations : LocationItem[] = [];
   jobStatus : JobStatusItem[] = [];
+  jobSubs! : Subscription;
+  statSubs! : Subscription;
+  locSubs! : Subscription;
 
   loaded = false;
 
@@ -37,6 +40,14 @@ export class ApplicationFormComponent extends GenericCrud<ApplicationItem> imple
     private dummy : DummyService) {
     super(service);
   }
+
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.jobSubs?.unsubscribe();
+    this.statSubs?.unsubscribe();
+    this.locSubs?.unsubscribe();
+  }
+
   ngAfterViewInit(): void {
     this.loadStatus();
   }
@@ -47,10 +58,10 @@ export class ApplicationFormComponent extends GenericCrud<ApplicationItem> imple
     });
   }
 
-  private load() {
+  private load() : void {
     if (this.id != 0) {
       const getapp = this.service.getById(this.path, this.id);
-      getapp.pipe(
+      this.jobSubs = getapp.pipe(
         finalize(() => {
           this.action = 'Edit';
           this.loaded = true;
@@ -62,7 +73,6 @@ export class ApplicationFormComponent extends GenericCrud<ApplicationItem> imple
           this.action = "Edit";
         },
         error: (error : any) => {
-          debugger;
           console.log(error.message);
           this.job = this.dummy.getApplications().find(x => x.id == this.id) ?? new ApplicationItem(0, "", "", 0, 0, "", new Date());
         }
@@ -74,9 +84,9 @@ export class ApplicationFormComponent extends GenericCrud<ApplicationItem> imple
     }
   }
 
-  private loadStatus() {
+  private loadStatus() : void {
     const statGetter = this.service.get('JobStatus');
-    statGetter.pipe(
+    this.statSubs = statGetter.pipe(
       finalize(() => {
         this.jobStatus.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
         this.loadLocations();
@@ -97,9 +107,9 @@ export class ApplicationFormComponent extends GenericCrud<ApplicationItem> imple
       });
   }
 
-  private loadLocations() {
+  private loadLocations() : void {
     const locGetter = this.service.get('Locations');
-    locGetter.pipe(
+    this.locSubs = locGetter.pipe(
       finalize(() => {
         this.locations.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
         this.load();
@@ -119,7 +129,7 @@ export class ApplicationFormComponent extends GenericCrud<ApplicationItem> imple
     });
   }
 
-  saveJob() {
+  saveJob() : void {
     this.onSave(this.path, this.job);
     this.backToMain();
   }

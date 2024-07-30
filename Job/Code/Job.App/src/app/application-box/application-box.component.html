@@ -7,7 +7,11 @@
             <strong>{{ item.companyName }}</strong><br>
             <div class="box-desc">
                 <div class="box-left">{{ item.position }}</div>
-                <div class="box-right">{{ item.createdDate | date: 'ddMMMYY' }}</div>
+                <div class="box-right">{{ item. createdDate | date: 'ddMMMYY' }}</div>
+            </div>
+            <div class="box-desc">
+                <div class="box-left">Status: {{ statusName }}</div>
+                <div class="box-right">{{ locationName }}</div>
             </div>
         </div>
     </div>

@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppUser } from '@models/appuser';
 import { AuthorisationService } from '@services/auth-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'login',
@@ -12,10 +13,16 @@ import { AuthorisationService } from '@services/auth-service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+
 
   loginForm! : FormGroup
   unsuccessful : boolean | null = null;
+
+  auth = inject(AuthorisationService);
+  router = inject(Router);
+
+  logSubs!: Subscription;
 
   get username() {
     return this.loginForm.get('username');
@@ -25,7 +32,9 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
-  constructor(private auth : AuthorisationService, private router : Router) {}
+  ngOnDestroy(): void {
+    this.logSubs?.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.newLoginForm();
@@ -41,13 +50,12 @@ export class LoginComponent implements OnInit {
   logIn() {
     let user = this.username == null ? '' : this.username.value;
     let pwd = this.password == null ? '' : this.password.value;
-    this.auth.LogIn(user, pwd).subscribe({
+    this.logSubs = this.auth.LogIn(user, pwd).subscribe({
       next: (user : any) => {
-          let appUser : AppUser = user;
           // sessionStorage.setItem('username', appUser.name);
           // sessionStorage.setItem('email', appUser.email);
           // sessionStorage.setItem('loginToken', appUser.token);
-          this.auth.user$.next(appUser);
+          this.auth.user$.next(user);
           this.router.navigate(['']);
       },
       error: (error : any) => {

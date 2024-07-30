@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ApplicationItem } from '@models/applicationItem';
 import { GenericHttpService } from '@services/generic-http.service';
 import { ApplicationListComponent } from '@app/application-list/application-list.component';
@@ -9,7 +9,7 @@ import { JobStatusItem } from '@models/jobStatusItem';
 import { CommonModule } from '@angular/common';
 import { ApplicationBoxesComponent } from '@app/application-boxes/application-boxes.component';
 import { DummyService } from '@services/dummy-service';
-import { finalize } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { AuthorisationService } from '@services/auth-service';
 import { LoadingComponent } from '@app/loading/loading.component';
 
@@ -20,9 +20,13 @@ import { LoadingComponent } from '@app/loading/loading.component';
   templateUrl: './application.component.html',
   styleUrl: './application.component.css'
 })
-export class ApplicationComponent implements AfterViewInit {
+export class ApplicationComponent implements AfterViewInit, OnDestroy {
 
   path = "JobApplications";
+  jobSubs! : Subscription;
+  statSubs! : Subscription;
+  locSubs! : Subscription;
+
   mainCollection : ApplicationItem[] = [];
   locations : LocationItem[] = [];
   status : JobStatusItem[] = [];
@@ -57,86 +61,28 @@ export class ApplicationComponent implements AfterViewInit {
   );
   ****************************************************************************************************************/
 
-  get IsLoggedIn() {
+  get IsLoggedIn() : boolean {
     let logged = false;
     const auths = this.auth.user$.subscribe(user => logged = user !== null);
     auths.unsubscribe();
     return logged;
   }
 
-  constructor(
+  constructor (
     private service : GenericHttpService<ApplicationItem>, 
     private router : Router,
     private dummy : DummyService,
     public auth : AuthorisationService) { 
   }
 
+  ngOnDestroy(): void {
+    this.jobSubs.unsubscribe();
+    this.statSubs.unsubscribe();
+    this.locSubs.unsubscribe();
+  }
+
   ngAfterViewInit(): void {
-
     this.loadStatus();
-  }
-
-  private load()
-  {
-    const jobGetter = this.service.get(this.path);
-    jobGetter.pipe(
-      finalize(() => this.loaded = true),
-    )
-    .subscribe({
-      next: (collection : any) => {
-        console.log('job applications loaded');
-        this.mainCollection = collection;
-      },
-      error: (error : any) => { 
-        this.mainCollection = this.dummy.getApplications();
-        console.log(error); 
-      }
-    });
-  }
-
-  private loadStatus() {
-    const statGetter = this.service.get('JobStatus');
-    statGetter.pipe(
-      finalize(() => {
-        this.status.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-        this.loadLocations();
-      })
-    )
-    .subscribe(
-      {
-        next: (statusCollection : any) => {
-            this.status = statusCollection;
-          },
-        error: (error : any) => { 
-          this.status = this.dummy.getStatus();
-          console.log(error.message); 
-        },
-        complete: () => { 
-          console.log('status load complete'); 
-          }
-      });
-  }
-
-  private loadLocations() {
-    const locGetter = this.service.get('Locations');
-    locGetter.pipe(
-      finalize(() => {
-        this.locations.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-        this.load();
-      })
-    )
-    .subscribe({
-      next: (locCollection : any) => {
-          this.locations = locCollection;
-        },        
-      error: (error : any) => { 
-        console.log(error.message);
-        this.locations = this.dummy.getLocations();
-      },
-      complete: () => {
-          console.log("locations loaded.");
-        }
-    });
   }
 
   filterUniqueCompanies() : { id : string, name : string} [] {
@@ -162,7 +108,69 @@ export class ApplicationComponent implements AfterViewInit {
     return visibleItems;
   }
 
-  addNew() {
+  addNew() : void {
     this.router.navigate(["form", "0"]);
+  }
+
+  private load() : void {
+    const jobGetter = this.service.get(this.path);
+    this.jobSubs = jobGetter.pipe(
+      finalize(() => this.loaded = true),
+    )
+    .subscribe({
+      next: (collection : any) => {
+        console.log('job applications loaded');
+        this.mainCollection = collection;
+      },
+      error: (error : any) => { 
+        this.mainCollection = this.dummy.getApplications();
+        console.log(error); 
+      }
+    });
+  }
+
+  private loadStatus() : void {
+    const statGetter = this.service.get('JobStatus');
+    this.statSubs = statGetter.pipe(
+      finalize(() => {
+        this.status.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+        this.loadLocations();
+      })
+    )
+    .subscribe(
+      {
+        next: (statusCollection : any) => {
+            this.status = statusCollection;
+          },
+        error: (error : any) => { 
+          this.status = this.dummy.getStatus();
+          console.log(error.message); 
+        },
+        complete: () => { 
+          console.log('status load complete'); 
+          }
+      });
+  }
+
+  private loadLocations() : void {
+    const locGetter = this.service.get('Locations');
+    this.locSubs = locGetter.pipe(
+      finalize(() => {
+        this.locations.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+        this.load();
+      })
+    )
+    .subscribe({
+      next: (locCollection : any) => {
+          this.locations = locCollection;
+        },        
+      error: (error : any) => { 
+        console.log(error.message);
+        this.locations = this.dummy.getLocations();
+      },
+      complete: () => {
+          console.log("locations loaded.");
+        }
+    });
   }
 }

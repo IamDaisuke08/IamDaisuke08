@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
@@ -18,12 +18,11 @@ export class AppComponent implements OnInit {
   navBars = new Array(4).fill(false);
   showingMobileBar : boolean = false;
 
-  constructor(public breakepoint : BreakpointObserver, 
-    public auth : AuthorisationService) {
-  }
+  breakpoint = inject(BreakpointObserver);
+  auth = inject(AuthorisationService);
 
   ngOnInit(): void {
-    this.breakepoint
+    this.breakpoint
     .observe(['(max-width: 62rem)'])
     .subscribe((state: BreakpointState) => {
       if (state.matches) {
